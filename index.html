@@ -472,7 +472,7 @@
 
 <div class="container">
     <div class="logo-container">
-        <img class="logo-img" id="main-logo" src="star-blue.png" alt="Matemática Avante PRO" onerror="handleLogoError()">
+        <img class="logo-img" id="main-logo" src="star-blue.jpg" alt="Matemática Avante PRO" onerror="handleLogoError()">
         <div id="logo-fallback-element" class="logo-fallback hidden">
             🧮 <span>Matemática</span> Avante PRO
         </div>
@@ -647,7 +647,7 @@
     };
     let currentUser = JSON.parse(localStorage.getItem('curr_user_pro')) || null;
 
-    // Avatar Padrão Base64 (Uma silhueta elegante para evitar quebra de imagens)
+    // Avatar Padrão Base64
     const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/></svg>";
 
     // CURADORIA DE LINKS DE OURO (10 REQUISITADOS)
@@ -664,7 +664,7 @@
         { name: "Matemática Robson Liers", desc: "Focado em desafios de raciocínio lógico e truques matemáticos.", url: "https://www.youtube.com/@MatematicaRaciocinioLogico" }
     ];
 
-    // ITENS DA LOJA INSTITUCIONAL (10 REQUISITADOS COM PREÇOS ESCALONADOS)
+    // ITENS DA LOJA INSTITUCIONAL
     const STORE_PRODUCTS = [
         { id: "item_1", name: "Moldura Cobre para o Perfil", price: 50 },
         { id: "item_2", name: "Moldura Prata de Veterano", price: 100 },
@@ -678,7 +678,7 @@
         { id: "item_10", name: "Fundo Animado Cosmic para Interface", price: 1000 }
     ];
 
-    // BANCO DE QUESTÕES DE PROPRIEDADE INTELECTUAL (30 QUESTÕES DIVIDIDAS EM 3 NÍVEIS)
+    // BANCO DE QUESTÕES
     const QUIZ_DATABASE = {
         facil: [
             { q: "Qual o valor de 7 + 3 × 4?", o: ["40", "19", "31", "28"], a: 1, e: "Regra de Precedência: Multiplicações são feitas antes das adições. Portanto: 3 × 4 = 12. Em seguida, 7 + 12 = 19." },
@@ -706,7 +706,7 @@
         ],
         avancado: [
             { q: "Qual é a derivada da função f(x) = 3x² + 5x - 2 em relação a x?", o: ["f'(x) = 6x + 5", "f'(x) = 3x + 5", "f'(x) = 6x", "f'(x) = 2x + 5"], a: 0, e: "Utilizando a regra do tombo para derivadas: d/dx(3x²) = 6x e d/dx(5x) = 5. A constante vira 0. Logo, 6x + 5." },
-            { q: "Dada a matriz A de ordem 2x2 com elementos [[2, 3], [1, 4]], qual o determinante de A?", o: ["11", "5", "8", "6"], a: 1, e: "O determinante de uma matriz 2x2 é a diferença do produto da diagonal principal pelo da secundária: (2 × 4) - (3 × 1) = 8 - 3 = 5." },
+            { q: "Dada a matriz A de ordem 2x2 com elementos [[2, 3], [1, 4]], qual o determinant de A?", o: ["11", "5", "8", "6"], a: 1, e: "O determinante de uma matriz 2x2 é a diferença do produto da diagonal principal pelo da secundária: (2 × 4) - (3 × 1) = 8 - 3 = 5." },
             { q: "Qual é o valor do limite quando x tende a 2 da função (x² - 4)/(x - 2)?", o: ["2", "4", "0", "Não existe"], a: 1, e: "Fatorando o numerador como diferença de quadrados: (x-2)(x+2)/(x-2). Simplificando o termo comum sobra (x+2). Aplicando o limite x->2: 2 + 2 = 4." },
             { q: "Quantos anagramas podem ser formados com as letras da palavra MATEMÁTICA? (Considere as repetições)", o: ["151.200", "3.628.800", "453.600", "50.400"], a: 0, e: "Permutação com repetição. A palavra possui 10 letras, onde M repete 2x, A repete 3x e T repete 2x. P = 10! / (2! × 3! × 2!) = 3.628.800 / 24 = 151.200." },
             { q: "Qual o valor da soma infinita da PG geométrica: 1 + 1/2 + 1/4 + 1/8 + ...?", o: ["1.5", "2", "3", "Infinita"], a: 1, e: "Fórmula da soma infinita de uma PG: S = a₁ / (1 - q). Onde a₁ = 1 e a razão q = 1/2. S = 1 / (1 - 1/2) = 1 / (1/2) = 2." },
@@ -738,7 +738,7 @@
         }, 4000);
     }
 
-    /* CONTROLADOR DE IMAGEM DA LOGO (FALLBACK CASO RETORNE ERRO 404) */
+    /* CONTROLADOR DE IMAGEM DA LOGO */
     function handleLogoError() {
         document.getElementById('main-logo').classList.add('hidden');
         document.getElementById('logo-fallback-element').classList.remove('hidden');
@@ -746,21 +746,18 @@
 
     /* SISTEMA DE ROTAS / ALTERNÂNCIA DE ABAS LINEARES (SPA) */
     function switchTab(tabId) {
-        // Remove active de todos os botões e conteúdos
         document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-        // Adiciona active nos elementos solicitados
         document.getElementById(`tab-btn-${tabId}`).classList.add('active');
         document.getElementById(`tab-${tabId}`).classList.add('active');
         
-        // Gatilhos específicos de renderização ao mudar de aba
         if (tabId === 'profile') renderProfileHistory();
         if (tabId === 'store') renderStore();
         if (tabId === 'admin') renderAdminPanel();
     }
 
-    /* MÓDULO 2: CONTROLE DE AUTENTICAÇÃO E PERSISTÊNCIA */
+    /* CONTROLE DE AUTENTICAÇÃO E PERSISTÊNCIA */
     function authLogin() {
         const nomeInput = document.getElementById('in-nome').value.trim();
         const roleSelect = document.getElementById('in-role').value;
@@ -770,11 +767,9 @@
             return;
         }
 
-        // Procura usuário no banco simulado
         let user = db.users.find(u => u.nome.toLowerCase() === nomeInput.toLowerCase());
 
         if (!user) {
-            // Cria novo registro caso não exista (Persistência)
             user = {
                 nome: nomeInput,
                 role: roleSelect,
@@ -788,11 +783,9 @@
             db.users.push(user);
         }
 
-        // Grava log de acesso com carimbo de data/hora real
         const timestamp = new Date().toLocaleString('pt-BR');
         db.logs.unshift(`[${timestamp}] Usuário ${user.nome} (${user.role}) realizou login.`);
 
-        // Salva estados
         currentUser = user;
         saveToLocalStorage();
 
@@ -810,7 +803,6 @@
         localStorage.setItem('db_avante_pro', JSON.stringify(db));
         if (currentUser) {
             localStorage.setItem('curr_user_pro', JSON.stringify(currentUser));
-            // Atualiza o objeto sincronizado dentro da lista principal do DB
             const idx = db.users.findIndex(u => u.nome.toLowerCase() === currentUser.nome.toLowerCase());
             if (idx !== -1) db.users[idx] = currentUser;
             localStorage.setItem('db_avante_pro', JSON.stringify(db));
@@ -820,35 +812,30 @@
     function initApp() {
         if (!currentUser) return;
 
-        // Oculta login, exibe APP
         document.getElementById('login-screen').classList.add('hidden');
         document.getElementById('app-screen').classList.remove('hidden');
 
-        // Renderiza elementos do Header Geral
         document.getElementById('header-name').innerText = currentUser.nome;
         document.getElementById('header-role').innerText = currentUser.role === 'admin' ? "👑 Administrador do Sistema" : "🎓 Aluno Estudante";
         document.getElementById('header-pts').innerText = currentUser.pts;
         document.getElementById('header-avatar').src = currentUser.avatar;
 
-        // Se for admin, exibe aba secreta de gestão
         if (currentUser.role === 'admin') {
             document.getElementById('tab-btn-admin').classList.remove('hidden');
         } else {
             document.getElementById('tab-btn-admin').classList.add('hidden');
         }
 
-        // Preenche inputs da aba de edição do perfil
         document.getElementById('edit-nome').value = currentUser.nome;
         document.getElementById('edit-bio').value = currentUser.bio;
         document.getElementById('profile-display-avatar').src = currentUser.avatar;
 
-        // Carrega sub-blocos dinâmicos
         renderProfileMedals();
         renderProfileHistory();
         renderLinks();
     }
 
-    /* MÓDULO 3: CONFIGURAÇÃO E ATUALIZAÇÃO DO PERFIL */
+    /* CONFIGURAÇÃO E ATUALIZAÇÃO DO PERFIL */
     function renderProfileMedals() {
         const box = document.getElementById('profile-medals-box');
         box.innerHTML = currentUser.medals.map(m => `<span class="medal-tag">🏅 ${m}</span>`).join('');
@@ -882,12 +869,10 @@
         currentUser.bio = novaBio;
         saveToLocalStorage();
         
-        // Re-sincroniza interface gráfica
         document.getElementById('header-name').innerText = currentUser.nome;
-        showToast("Perfil updated com sucesso!", "success");
+        showToast("Perfil atualizado com sucesso!", "success");
     }
 
-    /* UPLOAD DE FOTO VIA FILE READER EM BASE64 */
     function uploadAvatar(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -904,7 +889,7 @@
         reader.readAsDataURL(file);
     }
 
-    /* MÓDULO 4: EXECUTOR DO QUIZ DE APRENDIZADO (FLUXO LINEAR AUTOMÁTICO) */
+    /* EXECUTOR DO QUIZ */
     let activeQuiz = {
         level: '',
         questions: [],
@@ -1013,7 +998,7 @@
         switchTab('profile');
     }
 
-    /* MÓDULO 5: LOJA GAMIFICADA DE CUSTOMIZAÇÃO */
+    /* LOJA GAMIFICADA DE CUSTOMIZAÇÃO */
     function renderStore() {
         const box = document.getElementById('store-items-box');
         box.innerHTML = STORE_PRODUCTS.map(item => {
@@ -1049,7 +1034,7 @@
         renderStore();
     }
 
-    /* MÓDULO 6: CURADORIA EXTERNA (LINKS DE OURO) */
+    /* CURADORIA EXTERNA (LINKS DE OURO) */
     function renderLinks() {
         const box = document.getElementById('links-items-box');
         box.innerHTML = GOLDEN_LINKS.map(l => `
@@ -1063,7 +1048,7 @@
         `).join('');
     }
 
-    /* MÓDULO 7: PAINEL DO ADMINISTRADOR (METRICAS, LEADERBOARD E CERTIFICADOS) */
+    /* PAINEL DO ADMINISTRADOR */
     function renderAdminPanel() {
         const chartBox = document.getElementById('admin-chart-box');
         const sortedUsers = [...db.users].sort((a, b) => b.pts - a.pts);
@@ -1127,13 +1112,13 @@
         }
     }
 
-    /* SISTEMA DE EMISSÃO DE CERTIFICADOS VIA JANELA COMPATÍVEL */
+    /* EMISSÃO DE CERTIFICADOS */
     function adminEmitCertificate(nomeUsuario, pontos) {
         const dataEmissao = new Date().toLocaleDateString('pt-BR');
         const printWindow = window.open('', '_blank', 'width=900,height=650');
         
         if(!printWindow) {
-            alert("Erro: O bloqueador de pop-ups do seu navegador impediu a geração do certificado. Por favor, autorize pop-ups para este site.");
+            alert("Erro: O bloqueador de pop-ups impediu a geração do certificado.");
             return;
         }
 
@@ -1144,91 +1129,26 @@
                 <meta charset="UTF-8">
                 <title>Certificado de Excelência Acadêmica</title>
                 <style>
-                    body {
-                        background-color: #ffffff;
-                        color: #1e293b;
-                        font-family: 'Georgia', serif;
-                        padding: 0;
-                        margin: 0;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                    }
-                    .certificate-border {
-                        border: 15px double #1e293b;
-                        padding: 40px;
-                        width: 800px;
-                        background-color: #fffdf9;
-                        text-align: center;
-                        position: relative;
-                        box-sizing: border-box;
-                    }
-                    .certificate-border::before {
-                        content: "";
-                        position: absolute;
-                        top: 10px; left: 10px; right: 10px; bottom: 10px;
-                        border: 2px solid #fbbf24;
-                        pointer-events: none;
-                    }
-                    h1 {
-                        font-size: 42px;
-                        color: #0f172a;
-                        margin-bottom: 5px;
-                        text-transform: uppercase;
-                        letter-spacing: 2px;
-                    }
-                    h2 {
-                        font-size: 20px;
-                        color: #fbbf24;
-                        font-family: 'sans-serif';
-                        margin-top: 0;
-                        margin-bottom: 40px;
-                        letter-spacing: 3px;
-                    }
-                    p {
-                        font-size: 18px;
-                        line-height: 1.8;
-                        margin: 20px 0;
-                    }
-                    .student-name {
-                        font-size: 28px;
-                        font-weight: bold;
-                        text-decoration: underline;
-                        color: #0b0f19;
-                        display: block;
-                        margin: 15px 0;
-                    }
-                    .footer-sig {
-                        margin-top: 50px;
-                        display: flex;
-                        justify-content: space-around;
-                    }
-                    .signature-line {
-                        border-top: 1px solid #444;
-                        width: 250px;
-                        padding-top: 8px;
-                        font-family: 'sans-serif';
-                        font-size: 12px;
-                        color: #64748b;
-                    }
-                    .badge-gold {
-                        font-size: 45px;
-                        margin-top: 20px;
-                    }
+                    body { background-color: #ffffff; color: #1e293b; font-family: 'Georgia', serif; padding: 0; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+                    .certificate-border { border: 15px double #1e293b; padding: 40px; width: 800px; background-color: #fffdf9; text-align: center; position: relative; box-sizing: border-box; }
+                    .certificate-border::before { content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 2px solid #fbbf24; pointer-events: none; }
+                    h1 { font-size: 42px; color: #0f172a; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+                    h2 { font-size: 20px; color: #fbbf24; font-family: 'sans-serif'; margin-top: 0; margin-bottom: 40px; letter-spacing: 3px; }
+                    p { font-size: 18px; line-height: 1.8; margin: 20px 0; }
+                    .student-name { font-size: 28px; font-weight: bold; text-decoration: underline; color: #0b0f19; display: block; margin: 15px 0; }
+                    .footer-sig { margin-top: 50px; display: flex; justify-content: space-around; }
+                    .signature-line { border-top: 1px solid #444; width: 250px; padding-top: 8px; font-family: 'sans-serif'; font-size: 12px; color: #64748b; }
+                    .badge-gold { font-size: 45px; margin-top: 20px; }
                 </style>
             </head>
             <body>
                 <div class="certificate-border">
                     <h1>Certificado de Mérito</h1>
                     <h2>MATEMÁTICA AVANTE PRO</h2>
-                    
-                    <p>Certificamos com distinção e honra acadêmica que o discente</p>
+                    <p>Certificamos com distinção que o discente</p>
                     <span class="student-name">${nomeUsuario}</span>
-                    <p>completou com êxito os módulos avançados de resolução matemática, acumulando um total expressivo de <strong>${pontos} pontos gamificados</strong>, demonstrando proficiência, raciocínio lógico analítico e dedicação contínua aos estudos.</p>
-                    
+                    <p>completou os módulos avançados, acumulando <strong>${pontos} pontos</strong>, demonstrando raciocínio lógico analítico e dedicação contínua aos estudos.</p>
                     <div class="badge-gold">🏅</div>
-                    
                     <div class="footer-sig">
                         <div>
                             <div class="signature-line">Plataforma Matemática Avante PRO</div>
@@ -1245,13 +1165,10 @@
         `);
         
         printWindow.document.close();
-        
-        setTimeout(() => {
-            printWindow.print();
-        }, 500);
+        setTimeout(() => { printWindow.print(); }, 500);
     }
 
-    /* INICIALIZAÇÃO AUTOMÁTICA DA APLICAÇÃO EM WINDOW LOAD */
+    /* INICIALIZAÇÃO */
     window.onload = () => {
         if (currentUser) {
             initApp();
