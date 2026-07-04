@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemática Avante PRO | Plataforma Educacional Gamificada</title>
+    <style>
+        /* PALETA DE CORES E CONFIGURAÇÕES GERAIS (DARK MODE PROFISSIONAL) */
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #151f32;
+            --bg-input: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --success: #10b981;
+            --danger: #ef4444;
+            --gold: #fbbf24;
+            --border: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* NOTIFICAÇÃO TOAST */
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        .toast {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent);
+            color: var(--text-main);
+            padding: 15px 25px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* LOGO INSTITUCIONAL COM FALLBACK */
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .logo-img {
+            max-width: 120px;
+            height: auto;
+            display: inline-block;
+        }
+        /* Fallback caso a imagem não exista */
+        .logo-fallback {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .logo-fallback span { color: var(--accent); }
+
+        /* CARDS */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* TELA DE LOGIN */
+        .login-box {
+            max-width: 450px;
+            margin: 60px auto;
+        }
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        /* FORMULÁRIOS */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* BOTÕES */
+        .btn {
+            background-color: var(--accent);
+            color: #0b0f19;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s, transform 0.1s;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover { background-color: var(--accent-hover); }
+        .btn:active { transform: scale(0.98); }
+        .btn-secondary {
+            background-color: #334155;
+            color: var(--text-main);
+        }
+        .btn-secondary:hover { background-color: #475569; }
+        .btn-inline { width: auto; }
+        .btn-sm { padding: 6px 12px; font-size: 13px; border-radius: 4px; }
+        .btn-danger { background-color: var(--danger); color: white; }
+        .btn-danger:hover { background-color: #dc2626; }
+
+        /* HEADER DO APP E NAVBAR */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .user-summary {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-summary img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+        .score-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        .nav-tab-btn {
+            background-color: #1e293b;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .nav-tab-btn:hover {
+            color: var(--text-main);
+            background-color: #273549;
+        }
+        .nav-tab-btn.active {
+            background-color: var(--accent);
+            color: #0b0f19;
+            border-color: var(--accent);
+        }
+
+        /* SEÇÕES DA SPA */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ABA: PERFIL */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .profile-container { grid-template-columns: 250px 1fr; }
+        }
+        .profile-avatar-zone {
+            text-align: center;
+        }
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 15px;
+            background: #0f172a;
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: 0; top: 0; opacity: 0;
+            font-size: 100px; cursor: pointer;
+        }
+        .medals-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .medal-tag {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ABA: QUIZ (UM POR VEZ) */
+        .quiz-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .quiz-box-screen {
+            text-align: center;
+        }
+        .progress-bar-container {
+            background: var(--bg-input);
+            height: 8px;
+            border-radius: 4px;
+            width: 100%;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            background: var(--accent);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .question-text {
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .options-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .option-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 14px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.05);
+        }
+        /* Estados de validação imediata */
+        .option-btn.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: var(--success) !important; }
+        .option-btn.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: var(--danger) !important; }
+        
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .feedback-box.correct { display: block; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); color: var(--success); }
+        .feedback-box.wrong { display: block; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); color: var(--danger); }
+        .explanation-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--text-main);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 8px;
+        }
+
+        /* ABA: LOJA GAMIFICADA */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .store-item {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .store-item h4 { margin-bottom: 8px; font-size: 16px; }
+        .store-item .price {
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        .store-item .owned {
+            color: var(--success);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ABA: LINKS DE OURO */
+        .links-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        @media (min-width: 768px) { .links-list { grid-template-columns: 1fr 1fr; } }
+        .link-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: border-color 0.2s;
+        }
+        .link-card:hover { border-color: var(--accent); }
+        .link-card h4 { font-size: 16px; color: var(--accent); }
+
+        /* HISTÓRICO DE QUIZ */
+        .history-list {
+            margin-top: 15px;
+        }
+        .history-item {
+            background: var(--bg-input);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ABA: PAINEL ADMIN */
+        .admin-section-title {
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .admin-table th, .admin-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .admin-table th { background: var(--bg-input); color: var(--text-muted); }
+        
+        /* GRÁFICO CUSTOMIZADO VIA CSS */
+        .chart-container {
+            background: var(--bg-input);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 15px;
+        }
+        .chart-label { width: 120px; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .chart-bar-bg { flex-grow: 1; background: #1e293b; height: 20px; border-radius: 4px; overflow: hidden; }
+        .chart-bar-fill { background: linear-gradient(90deg, var(--accent), var(--accent-hover)); height: 100%; width: 0%; transition: width 0.5s ease; }
+        .chart-val { width: 50px; text-align: right; font-size: 14px; font-weight: bold; }
+
+        .log-box {
+            max-height: 150px;
+            overflow-y: auto;
+            background: var(--bg-input);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #a7f3d0;
+        }
+        .log-line { margin-bottom: 4px; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<div class="container">
+    <div class="logo-container">
+        <img class="logo-img" id="main-logo" src="star-blue.png" alt="Matemática Avante PRO" onerror="handleLogoError()">
+        <div id="logo-fallback-element" class="logo-fallback hidden">
+            🧮 <span>Matemática</span> Avante PRO
+        </div>
+    </div>
+
+    <div id="login-screen" class="card login-box">
+        <h2>Acesse a Plataforma</h2>
+        <div class="form-group">
+            <label for="in-nome">Seu Nome Completo</label>
+            <input type="text" id="in-nome" placeholder="Ex: João Silva">
+        </div>
+        <div class="form-group">
+            <label for="in-role">Tipo de Conta</label>
+            <select id="in-role">
+                <option value="aluno">Aluno Estudante</option>
+                <option value="admin">Administrador do Sistema</option>
+            </select>
+        </div>
+        <button class="btn" onclick="authLogin()">Entrar na Plataforma →</button>
+    </div>
+
+    <div id="app-screen" class="hidden">
+        <div class="card app-header">
+            <div class="user-summary">
+                <img id="header-avatar" src="" alt="Avatar">
+                <div>
+                    <h3 id="header-name">Carregando...</h3>
+                    <p style="font-size: 13px; color: var(--text-muted);" id="header-role">Aluno</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <div class="score-badge">💎 <span id="header-pts">0</span> Pontos</div>
+                <button class="btn btn-secondary btn-sm btn-inline" onclick="authLogout()">Sair</button>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab-btn active" id="tab-btn-profile" onclick="switchTab('profile')">👤 Meu Perfil</button>
+            <button class="nav-tab-btn" id="tab-btn-quiz" onclick="switchTab('quiz')">🧮 Responder Quiz</button>
+            <button class="nav-tab-btn" id="tab-btn-store" onclick="switchTab('store')">🛒 Loja de Itens</button>
+            <button class="nav-tab-btn" id="tab-btn-links" onclick="switchTab('links')">🔗 Links de Ouro</button>
+            <button class="nav-tab-btn btn-danger hidden" id="tab-btn-admin" onclick="switchTab('admin')" style="color: white;">⚙️ Painel Admin</button>
+        </div>
+
+        <div id="tab-profile" class="tab-content active card">
+            <div class="profile-container">
+                <div class="profile-avatar-zone">
+                    <img id="profile-display-avatar" src="" class="profile-picture" alt="Foto de Perfil">
+                    <div class="file-input-wrapper">
+                        <button class="btn btn-secondary btn-sm">Alterar Foto</button>
+                        <input type="file" id="profile-file-input" accept="image/*" onchange="uploadAvatar(event)">
+                    </div>
+                    <div class="medals-list" id="profile-medals-box">
+                        </div>
+                </div>
+                <div>
+                    <h3>Configurações Básicas</h3>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label for="edit-nome">Nome de Exibição</label>
+                        <input type="text" id="edit-nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-bio">Biografia / Metas de Estudo</label>
+                        <textarea id="edit-bio" rows="3" placeholder="Conte um pouco sobre seus objetivos na matemática..."></textarea>
+                    </div>
+                    <button class="btn btn-inline" onclick="saveProfile()">Salvar Alterações</button>
+
+                    <h3 style="margin-top:30px;">Histórico Recente de Quizzes</h3>
+                    <div class="history-list" id="profile-history-box">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-quiz" class="tab-content card">
+            <div id="quiz-selection">
+                <h3>Escolha um Nível de Desafio</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Cada acerto garante 10 pontos para gastar na loja institucional.</p>
+                <div class="quiz-levels">
+                    <div class="card" style="margin:0; text-align:center; background: var(--bg-input);">
+                        <h4>🟢 Fácil</h4>
+                        <p style="font-size:13px; color:var(--text-muted); margin: 10px 0;">Matemática Básica e Aritmética</p>
+                        <button class="btn btn-sm" onclick="startQuiz('facil')">Iniciar Nível</button>
+                    </div>
+                    <div class="card" style="margin:0; text-align:center; background: var(--bg-input);">
+                        <h4>🟡 Médio</h4>
+                        <p style="font-size:13px; color:var(--text-muted); margin: 10px 0;">Álgebra e Geometria Plana</p>
+                        <button class="btn btn-sm" onclick="startQuiz('medio')">Iniciar Nível</button>
+                    </div>
+                    <div class="card" style="margin:0; text-align:center; background: var(--bg-input);">
+                        <h4>🔴 Avançado</h4>
+                        <p style="font-size:13px; color:var(--text-muted); margin: 10px 0;">Funções, Logaritmos e Análise</p>
+                        <button class="btn btn-sm" onclick="startQuiz('avancado')">Iniciar Nível</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quiz-active-box" class="quiz-box-screen hidden">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span id="quiz-title-lvl" style="font-weight: bold; color: var(--accent);">Nível</span>
+                    <span id="quiz-tracker" style="font-size: 14px; color: var(--text-muted);">Questão 1 de 10</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="quiz-progress-fill" class="progress-bar-fill"></div>
+                </div>
+                
+                <div id="question-container">
+                    <p class="question-text" id="quiz-question-text">Carregando pergunta...</p>
+                    <div class="options-list" id="quiz-options-box">
+                        </div>
+                </div>
+
+                <div id="quiz-feedback" class="feedback-box">
+                    <strong id="feedback-title">Correto!</strong>
+                    <p class="explanation-text" id="feedback-explanation"></p>
+                </div>
+
+                <button id="quiz-next-btn" class="btn btn-inline hidden" style="margin-top:15px;" onclick="nextQuestion()">Avançar Questão →</button>
+            </div>
+        </div>
+
+        <div id="tab-store" class="tab-content card">
+            <h3>Loja do Conhecimento</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Use suas joias de pontos acumulados para adquirir itens de customização exclusivos.</p>
+            <div class="store-grid" id="store-items-box">
+                </div>
+        </div>
+
+        <div id="tab-links" class="tab-content card">
+            <h3>Links de Ouro - Curadoria de Conteúdo</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Acesse diretamente as melhores plataformas de ensino e canais do YouTube parceiros:</p>
+            <div class="links-list" id="links-items-box">
+                </div>
+        </div>
+
+        <div id="tab-admin" class="tab-content card">
+            <h3>Painel Geral do Administrador</h3>
+            
+            <div class="admin-section-title">📊 Ranking Geral da Turma (Leaderboard)</div>
+            <div class="chart-container" id="admin-chart-box">
+                </div>
+
+            <div class="admin-section-title">👥 Controle e Gestão de Usuários</div>
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cargo</th>
+                            <th>Pontos</th>
+                            <th>Inventário</th>
+                            <th>Ações Administrativas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-users-table-body">
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="admin-section-title">🪵 Histórico Global de Acessos (Auditoria de Entrada)</div>
+            <div class="log-box" id="admin-logs-box">
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* BANCO DE DADOS CORE (ESTRUTURA COMPLETA COMPATÍVEL COM LOCALSTORAGE) */
+    let db = JSON.parse(localStorage.getItem('db_avante_pro')) || {
+        users: [],
+        logs: []
+    };
+    let currentUser = JSON.parse(localStorage.getItem('curr_user_pro')) || null;
+
+    // Avatar Padrão Base64 (Uma silhueta elegante para evitar quebra de imagens)
+    const DEFAULT_AVATAR = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/></svg>";
+
+    // CURADORIA DE LINKS DE OURO (10 REQUISITADOS)
+    const GOLDEN_LINKS = [
+        { name: "Portal Prof. Ferretto", desc: "Plataforma completa focada em matemática básica, ENEM e vestibulares.", url: "https://www.ferretto.com.br" },
+        { name: "Khan Academy Brasil", desc: "Aulas interativas gratuitas com trilhas personalizadas de aprendizado.", url: "https://pt.khanacademy.org" },
+        { name: "Matemática Rio com Rafael Procopio", desc: "Um dos maiores canais do YouTube focado em desmistificar exatas.", url: "https://www.matematicario.com.br" },
+        { name: "Gis com Giz Matemática", desc: "Explicações didáticas, passo a passo de conceitos fundamentais.", url: "https://www.youtube.com/@GiscomGiz" },
+        { name: "Equaciona com Paulo Pereira", desc: "Excelente para concursos militares, vestibulares tradicionais e ENEM.", url: "https://www.youtube.com/@equaciona" },
+        { name: "Marcos Aba Matemática", desc: "A maior coletânea de vídeos focados em tirar dúvidas rápidas de álgebra.", url: "https://www.youtube.com/@MarcosAbaMatematica" },
+        { name: "Mestres do ENEM", desc: "Estratégias específicas e resoluções de questões da prova nacional.", url: "https://www.youtube.com/@MestresDoEnem" },
+        { name: "Descomplica Exatas", desc: "Aulas dinâmicas, mapas mentais e resumos práticos de vestibulares.", url: "https://descomplica.com.br" },
+        { name: "Me Salva! Plataforma", desc: "Trilhas de engenharia, cálculo e matemática do ensino médio.", url: "https://mesalva.com" },
+        { name: "Matemática Robson Liers", desc: "Focado em desafios de raciocínio lógico e truques matemáticos.", url: "https://www.youtube.com/@MatematicaRaciocinioLogico" }
+    ];
+
+    // ITENS DA LOJA INSTITUCIONAL (10 REQUISITADOS COM PREÇOS ESCALONADOS)
+    const STORE_PRODUCTS = [
+        { id: "item_1", name: "Moldura Cobre para o Perfil", price: 50 },
+        { id: "item_2", name: "Moldura Prata de Veterano", price: 100 },
+        { id: "item_3", name: "Moldura de Ouro Reluzente", price: 200 },
+        { id: "item_4", name: "Tag Customizada: 'Pitágoras'", price: 250 },
+        { id: "item_5", name: "Tag Customizada: 'Einstein'", price: 300 },
+        { id: "item_6", name: "Tema Exclusivo Cyberpunk", price: 400 },
+        { id: "item_7", name: "Título Lendário: Mestre do Cálculo", price: 500 },
+        { id: "item_8", name: "Acesso ao Grupo de Estudos VIP", price: 600 },
+        { id: "item_9", name: "Mascote Digital Coruja da Sabedoria", price: 750 },
+        { id: "item_10", name: "Fundo Animado Cosmic para Interface", price: 1000 }
+    ];
+
+    // BANCO DE QUESTÕES DE PROPRIEDADE INTELECTUAL (30 QUESTÕES DIVIDIDAS EM 3 NÍVEIS)
+    const QUIZ_DATABASE = {
+        facil: [
+            { q: "Qual o valor de 7 + 3 × 4?", o: ["40", "19", "31", "28"], a: 1, e: "Regra de Precedência: Multiplicações são feitas antes das adições. Portanto: 3 × 4 = 12. Em seguida, 7 + 12 = 19." },
+            { q: "Se um triângulo tem lados medindo 5cm, 5cm e 5cm, ele é classificado como:", o: ["Isósceles", "Escaleno", "Retângulo", "Equilátero"], a: 3, e: "Triângulos equiláteros possuem todos os três lados congruentes (iguais)." },
+            { q: "Qual é a raiz quadrada de 144?", o: ["12", "14", "10", "16"], a: 0, e: "A raiz quadrada de um número é outro que multiplicado por si mesmo resulta no primeiro. Como 12 × 12 = 144, a resposta é 12." },
+            { q: "Quantos minutos existem em 3 horas e meia?", o: ["180 minutos", "210 minutos", "150 minutos", "200 minutos"], a: 1, e: "Cada hora tem 60 minutos. Portanto, 3 horas = 180 minutos. Meia hora = 30 minutos. Total: 180 + 30 = 210 minutos." },
+            { q: "Qual é o valor numérico de 2⁴?", o: ["8", "12", "16", "6"], a: 2, e: "Potenciação consiste em multiplicar a base por ela mesma o número de vezes do expoente. 2 × 2 × 2 × 2 = 16." },
+            { q: "Simplificando a fração 15/45, obtemos:", o: ["1/3", "2/5", "1/5", "3/4"], a: 0, e: "Dividindo o numerador e o denominador pelo máximo divisor comum que é 15, temos: 15÷15 = 1 e 45÷15 = 3. Logo, 1/3." },
+            { q: "Quanto é 15% de 200?", o: ["20", "35", "30", "40"], a: 2, e: "Cálculo de porcentagem: (15 / 100) × 200 = 0.15 × 200 = 30." },
+            { q: "Em uma equação x - 8 = 15, qual o valor de x?", o: ["7", "23", "22", "13"], a: 1, e: "Isolando a incógnita x, passamos o -8 para o outro lado da igualdade invertendo seu sinal: x = 15 + 8 = 23." },
+            { q: "Qual é o menor número primo?", o: ["0", "1", "2", "3"], a: 2, e: "O número 2 é o único número primo par e, por definição conceitual, é o menor número primo existente." },
+            { q: "Qual o perímetro de um quadrado com área de 36cm²?", o: ["24cm", "36cm", "12cm", "16cm"], a: 0, e: "Se a área do quadrado é L² = 36, logo o seu lado L = 6cm. O perímetro é a soma dos 4 lados: 4 × 6 = 24cm." }
+        ],
+        medio: [
+            { q: "Qual o valor de x na equação 3x + 5 = 2x + 12?", o: ["x = 5", "x = 7", "x = 17", "x = 4"], a: 1, e: "Passando as incógnitas para o lado esquerdo e os coeficientes independentes para o direito: 3x - 2x = 12 - 5 -> x = 7." },
+            { q: "A área de um círculo com raio de 3 metros é de aproximadamente: (Considere π = 3,14)", o: ["28,26 m²", "18,84 m²", "9,42 m²", "25,12 m²"], a: 0, e: "Fórmula da área do círculo: A = π × r². Substituindo os valores: A = 3.14 × 3² = 3.14 × 9 = 28.26 m²." },
+            { q: "Em um triângulo retângulo, se os catetos medem 6cm e 8cm, quanto mede a hipotenusa?", o: ["10cm", "14cm", "12cm", "9cm"], a: 0, e: "Teorema di Pitágoras: h² = c₁² + c₂² -> h² = 6² + 8² = 36 + 64 = 100. Logo, h = √100 = 10cm." },
+            { q: "Qual a probabilidade de lançar um dado comum de 6 faces e sair um número par?", o: ["1/3", "1/2", "2/3", "1/6"], a: 1, e: "Casos favoráveis (números pares: 2, 4, 6) = 3. Casos totais = 6. Probabilidade = 3/6 que simplificado resulta em 1/2." },
+            { q: "Qual é o valor do logaritmo log₁₀(1000)?", o: ["2", "4", "1", "3"], a: 3, e: "O logaritmo pergunta a qual expoente devemos elevar a base 10 para obter 1000. Como 10³ = 1000, o resultado do logaritmo é 3." },
+            { q: "Se a progressão aritmética (PA) inicia com termo a₁ = 3 e razão r = 4, qual o quinto termo?", o: ["15", "19", "23", "16"], a: 1, e: "Fórmula do termo geral da PA: a_n = a₁ + (n-1)×r. Para n=5: a₅ = 3 + (5-1)×4 = 3 + 4×4 = 3 + 16 = 19." },
+            { q: "Qual é o volume de um cubo cujas arestas medem 4cm?", o: ["16cm³", "48cm³", "64cm³", "32cm³"], a: 2, e: "O volume do cubo é dado por aresta ao cubo (V = a³). Logo, V = 4 × 4 × 4 = 64cm³." },
+            { q: "Qual é o valor da soma dos ângulos internos de um pentágono?", o: ["360°", "540°", "720°", "180°"], a: 1, e: "Fórmula da soma dos ângulos internos: S = (n - 2) × 180. Para um pentágono (n=5): S = (5 - 2) × 180 = 3 × 180 = 540°." },
+            { q: "Resolva o sistema linear simples: x + y = 10 e x - y = 4. Qual o valor de x?", o: ["x = 5", "x = 6", "x = 7", "x = 3"], a: 2, e: "Somando as duas equações membro a membro eliminamos a variável y: (x+y) + (x-y) = 10 + 4 -> 2x = 14 -> x = 7." },
+            { q: "Qual é o coeficiente angular da reta que passa pelos pontos A(1, 2) e B(3, 8)?", o: ["3", "2", "4", "6"], a: 0, e: "Fórmula do coeficiente angular: m = (y₂ - y₁) / (x₂ - x₁). Substituindo: m = (8 - 2) / (3 - 1) = 6 / 2 = 3." }
+        ],
+        avancado: [
+            { q: "Qual é a derivada da função f(x) = 3x² + 5x - 2 em relação a x?", o: ["f'(x) = 6x + 5", "f'(x) = 3x + 5", "f'(x) = 6x", "f'(x) = 2x + 5"], a: 0, e: "Utilizando a regra do tombo para derivadas: d/dx(3x²) = 6x e d/dx(5x) = 5. A constante vira 0. Logo, 6x + 5." },
+            { q: "Dada a matriz A de ordem 2x2 com elementos [[2, 3], [1, 4]], qual o determinante de A?", o: ["11", "5", "8", "6"], a: 1, e: "O determinante de uma matriz 2x2 é a diferença do produto da diagonal principal pelo da secundária: (2 × 4) - (3 × 1) = 8 - 3 = 5." },
+            { q: "Qual é o valor do limite quando x tende a 2 da função (x² - 4)/(x - 2)?", o: ["2", "4", "0", "Não existe"], a: 1, e: "Fatorando o numerador como diferença de quadrados: (x-2)(x+2)/(x-2). Simplificando o termo comum sobra (x+2). Aplicando o limite x->2: 2 + 2 = 4." },
+            { q: "Quantos anagramas podem ser formados com as letras da palavra MATEMÁTICA? (Considere as repetições)", o: ["151.200", "3.628.800", "453.600", "50.400"], a: 0, e: "Permutação com repetição. A palavra possui 10 letras, onde M repete 2x, A repete 3x e T repete 2x. P = 10! / (2! × 3! × 2!) = 3.628.800 / 24 = 151.200." },
+            { q: "Qual o valor da soma infinita da PG geométrica: 1 + 1/2 + 1/4 + 1/8 + ...?", o: ["1.5", "2", "3", "Infinita"], a: 1, e: "Fórmula da soma infinita de uma PG: S = a₁ / (1 - q). Onde a₁ = 1 e a razão q = 1/2. S = 1 / (1 - 1/2) = 1 / (1/2) = 2." },
+            { q: "Resolva para x a equação exponencial: 2^(x+1) = 32.", o: ["x = 3", "x = 4", "x = 5", "x = 2"], a: 1, e: "Fatorando o 32 na base 2, temos 32 = 2⁵. Logo 2^(x+1) = 2⁵. Igualando os expoentes: x + 1 = 5 -> x = 4." },
+            { q: "Qual é o valor numérico de número complexo i² na teoria fundamental de Gauss?", o: ["1", "-1", "i", "√-1"], a: 1, e: "Por definição na matemática de números complexos, a unidade imaginária i é igual a √-1, fazendo com que i² seja igual a -1." },
+            { q: "Qual é a integral definida de 2x dx no intervalo de [1, 3]?", o: ["8", "6", "9", "4"], a: 0, e: "A primitiva de 2x é x². Aplicando o Teorema Fundamental do Cálculo no intervalo de 1 a 3: (3²) - (1²) = 9 - 1 = 8." },
+            { q: "Em uma urna com 4 bolas vermelhas e 6 azuis, retirando duas bolas consecutivas sem reposição, qual a chance de ambas serem vermelhas?", o: ["2/15", "4/25", "1/5", "1/6"], a: 0, e: "Primeira retirada: 4/10. Segunda retirada: 3/9. Multiplicando as probabilidades conjuntas: (4/10) × (3/9) = 12 / 90 = 2/15." },
+            { q: "Qual o período trigonométrico da função básica f(x) = sen(2x)?", o: ["2π", "π", "π/2", "4π"], a: 1, e: "O período de uma função f(x)=sen(cx) é calculado por P = 2π / |c|. Como c = 2, temos P = 2π / 2 = π." }
+        ]
+    };
+
+    /* SISTEMA DE NOTIFICAÇÃO INTERNA (TOAST) */
+    function showToast(message, type = 'accent') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast`;
+        if (type === 'success') toast.style.borderLeftColor = 'var(--success)';
+        if (type === 'danger') toast.style.borderLeftColor = 'var(--danger)';
+        if (type === 'gold') toast.style.borderLeftColor = 'var(--gold)';
+        
+        toast.innerHTML = `<span>🔔</span> <div>${message}</div>`;
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(100%)';
+            toast.style.transition = 'all 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
+
+    /* CONTROLADOR DE IMAGEM DA LOGO (FALLBACK CASO RETORNE ERRO 404) */
+    function handleLogoError() {
+        document.getElementById('main-logo').classList.add('hidden');
+        document.getElementById('logo-fallback-element').classList.remove('hidden');
+    }
+
+    /* SISTEMA DE ROTAS / ALTERNÂNCIA DE ABAS LINEARES (SPA) */
+    function switchTab(tabId) {
+        // Remove active de todos os botões e conteúdos
+        document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        // Adiciona active nos elementos solicitados
+        document.getElementById(`tab-btn-${tabId}`).classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+        
+        // Gatilhos específicos de renderização ao mudar de aba
+        if (tabId === 'profile') renderProfileHistory();
+        if (tabId === 'store') renderStore();
+        if (tabId === 'admin') renderAdminPanel();
+    }
+
+    /* MÓDULO 2: CONTROLE DE AUTENTICAÇÃO E PERSISTÊNCIA */
+    function authLogin() {
+        const nomeInput = document.getElementById('in-nome').value.trim();
+        const roleSelect = document.getElementById('in-role').value;
+
+        if (!nomeInput) {
+            showToast("Por favor, digite seu nome completo para acessar.", "danger");
+            return;
+        }
+
+        // Procura usuário no banco simulado
+        let user = db.users.find(u => u.nome.toLowerCase() === nomeInput.toLowerCase());
+
+        if (!user) {
+            // Cria novo registro caso não exista (Persistência)
+            user = {
+                nome: nomeInput,
+                role: roleSelect,
+                pts: 0,
+                bio: "Estudante determinado do Matemática Avante PRO.",
+                avatar: DEFAULT_AVATAR,
+                medals: ["Novato Avante"],
+                inventory: [],
+                history: []
+            };
+            db.users.push(user);
+        }
+
+        // Grava log de acesso com carimbo de data/hora real
+        const timestamp = new Date().toLocaleString('pt-BR');
+        db.logs.unshift(`[${timestamp}] Usuário ${user.nome} (${user.role}) realizou login.`);
+
+        // Salva estados
+        currentUser = user;
+        saveToLocalStorage();
+
+        showToast(`Bem-vindo(a), ${user.nome}!`, "success");
+        initApp();
+    }
+
+    function authLogout() {
+        currentUser = null;
+        localStorage.removeItem('curr_user_pro');
+        location.reload();
+    }
+
+    function saveToLocalStorage() {
+        localStorage.setItem('db_avante_pro', JSON.stringify(db));
+        if (currentUser) {
+            localStorage.setItem('curr_user_pro', JSON.stringify(currentUser));
+            // Atualiza o objeto sincronizado dentro da lista principal do DB
+            const idx = db.users.findIndex(u => u.nome.toLowerCase() === currentUser.nome.toLowerCase());
+            if (idx !== -1) db.users[idx] = currentUser;
+            localStorage.setItem('db_avante_pro', JSON.stringify(db));
+        }
+    }
+
+    function initApp() {
+        if (!currentUser) return;
+
+        // Oculta login, exibe APP
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('app-screen').classList.remove('hidden');
+
+        // Renderiza elementos do Header Geral
+        document.getElementById('header-name').innerText = currentUser.nome;
+        document.getElementById('header-role').innerText = currentUser.role === 'admin' ? "👑 Administrador do Sistema" : "🎓 Aluno Estudante";
+        document.getElementById('header-pts').innerText = currentUser.pts;
+        document.getElementById('header-avatar').src = currentUser.avatar;
+
+        // Se for admin, exibe aba secreta de gestão
+        if (currentUser.role === 'admin') {
+            document.getElementById('tab-btn-admin').classList.remove('hidden');
+        } else {
+            document.getElementById('tab-btn-admin').classList.add('hidden');
+        }
+
+        // Preenche inputs da aba de edição do perfil
+        document.getElementById('edit-nome').value = currentUser.nome;
+        document.getElementById('edit-bio').value = currentUser.bio;
+        document.getElementById('profile-display-avatar').src = currentUser.avatar;
+
+        // Carrega sub-blocos dinâmicos
+        renderProfileMedals();
+        renderProfileHistory();
+        renderLinks();
+    }
+
+    /* MÓDULO 3: CONFIGURAÇÃO E ATUALIZAÇÃO DO PERFIL */
+    function renderProfileMedals() {
+        const box = document.getElementById('profile-medals-box');
+        box.innerHTML = currentUser.medals.map(m => `<span class="medal-tag">🏅 ${m}</span>`).join('');
+    }
+
+    function renderProfileHistory() {
+        const box = document.getElementById('profile-history-box');
+        if (!currentUser.history || currentUser.history.length === 0) {
+            box.innerHTML = `<p style="color:var(--text-muted); font-size:14px;">Nenhum quiz realizado nesta conta até o momento.</p>`;
+            return;
+        }
+        box.innerHTML = currentUser.history.map(h => `
+            <div class="history-item">
+                <span>⚡ Nível: <strong>${h.level.toUpperCase()}</strong></span>
+                <span>Acertos: ${h.score}/10</span>
+                <span style="color:var(--accent); font-weight:bold;">+${h.ptsGained} pts</span>
+            </div>
+        `).join('');
+    }
+
+    function saveProfile() {
+        const novoNome = document.getElementById('edit-nome').value.trim();
+        const novaBio = document.getElementById('edit-bio').value.trim();
+
+        if (!novoNome) {
+            showToast("O nome não pode ficar em branco.", "danger");
+            return;
+        }
+
+        currentUser.nome = novoNome;
+        currentUser.bio = novaBio;
+        saveToLocalStorage();
+        
+        // Re-sincroniza interface gráfica
+        document.getElementById('header-name').innerText = currentUser.nome;
+        showToast("Perfil updated com sucesso!", "success");
+    }
+
+    /* UPLOAD DE FOTO VIA FILE READER EM BASE64 */
+    function uploadAvatar(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64Img = e.target.result;
+            currentUser.avatar = base64Img;
+            document.getElementById('profile-display-avatar').src = base64Img;
+            document.getElementById('header-avatar').src = base64Img;
+            saveToLocalStorage();
+            showToast("Foto de perfil alterada com sucesso!", "success");
+        };
+        reader.readAsDataURL(file);
+    }
+
+    /* MÓDULO 4: EXECUTOR DO QUIZ DE APRENDIZADO (FLUXO LINEAR AUTOMÁTICO) */
+    let activeQuiz = {
+        level: '',
+        questions: [],
+        currentIndex: 0,
+        correctCount: 0,
+        answered: false
+    };
+
+    function startQuiz(level) {
+        activeQuiz.level = level;
+        activeQuiz.questions = JSON.parse(JSON.stringify(QUIZ_DATABASE[level]));
+        activeQuiz.currentIndex = 0;
+        activeQuiz.correctCount = 0;
+        activeQuiz.answered = false;
+
+        document.getElementById('quiz-selection').classList.add('hidden');
+        document.getElementById('quiz-active-box').classList.remove('hidden');
+        
+        renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+        activeQuiz.answered = false;
+        document.getElementById('quiz-feedback').className = "feedback-box";
+        document.getElementById('quiz-next-btn').classList.add('hidden');
+
+        const qData = activeQuiz.questions[activeQuiz.currentIndex];
+        
+        document.getElementById('quiz-title-lvl').innerText = `Nível: ${activeQuiz.level.toUpperCase()}`;
+        document.getElementById('quiz-tracker').innerText = `Questão ${activeQuiz.currentIndex + 1} de 10`;
+        const pct = ((activeQuiz.currentIndex) / 10) * 100;
+        document.getElementById('quiz-progress-fill').style.width = `${pct}%`;
+
+        document.getElementById('quiz-question-text').innerText = qData.q;
+
+        const optionsBox = document.getElementById('quiz-options-box');
+        optionsBox.innerHTML = qData.o.map((opt, idx) => `
+            <button class="option-btn" onclick="submitAnswer(${idx})" id="opt-${idx}">${opt}</button>
+        `).join('');
+    }
+
+    function submitAnswer(chosenIdx) {
+        if (activeQuiz.answered) return;
+        activeQuiz.answered = true;
+
+        const qData = activeQuiz.questions[activeQuiz.currentIndex];
+        const options = document.getElementById('quiz-options-box').getElementsByTagName('button');
+        
+        for (let i = 0; i < options.length; i++) {
+            options[i].disabled = true;
+        }
+
+        const feedbackBox = document.getElementById('quiz-feedback');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const feedbackTitle = document.getElementById('feedback-title');
+
+        if (chosenIdx === qData.a) {
+            document.getElementById(`opt-${chosenIdx}`).classList.add('correct');
+            feedbackBox.className = "feedback-box correct";
+            feedbackTitle.innerText = "🎯 Resposta Correta! Muito bem.";
+            activeQuiz.correctCount++;
+        } else {
+            document.getElementById(`opt-${chosenIdx}`).classList.add('wrong');
+            document.getElementById(`opt-${qData.a}`).classList.add('correct');
+            feedbackBox.className = "feedback-box wrong";
+            feedbackTitle.innerText = "❌ Resposta Incorreta.";
+        }
+
+        feedbackExplanation.innerHTML = `<strong>Gabarito Calculado:</strong><div class='explanation-text'>${qData.e}</div>`;
+        document.getElementById('quiz-next-btn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+        activeQuiz.currentIndex++;
+        if (activeQuiz.currentIndex < 10) {
+            renderQuizQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function finishQuiz() {
+        const ptsGained = activeQuiz.correctCount * 10;
+        currentUser.pts += ptsGained;
+
+        const logQuiz = {
+            level: activeQuiz.level,
+            score: activeQuiz.correctCount,
+            ptsGained: ptsGained
+        };
+        if (!currentUser.history) currentUser.history = [];
+        currentUser.history.unshift(logQuiz);
+
+        if (activeQuiz.correctCount === 10 && !currentUser.medals.includes(`Gênio do ${activeQuiz.level}`)) {
+            currentUser.medals.push(`Gênio do ${activeQuiz.level}`);
+            showToast(`Nova Medalha Desbloqueada: Gênio do ${activeQuiz.level}!`, "gold");
+        }
+
+        saveToLocalStorage();
+
+        document.getElementById('header-pts').innerText = currentUser.pts;
+        document.getElementById('quiz-active-box').classList.add('hidden');
+        document.getElementById('quiz-selection').classList.remove('hidden');
+        
+        alert(`Fim do Quiz!\nVocê acertou ${activeQuiz.correctCount}/10 questões.\nPontos Ganhos: +${ptsGained} 💎`);
+        switchTab('profile');
+    }
+
+    /* MÓDULO 5: LOJA GAMIFICADA DE CUSTOMIZAÇÃO */
+    function renderStore() {
+        const box = document.getElementById('store-items-box');
+        box.innerHTML = STORE_PRODUCTS.map(item => {
+            const hasItem = currentUser.inventory && currentUser.inventory.includes(item.id);
+            return `
+                <div class="store-item">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p class="price">💎 ${item.price} pts</p>
+                    </div>
+                    ${hasItem ? 
+                        `<span class="owned">✓ Adquirido</span>` : 
+                        `<button class="btn btn-sm" onclick="purchaseItem('${item.id}', ${item.price})">Comprar</button>`
+                    }
+                </div>
+            `;
+        }).join('');
+    }
+
+    function purchaseItem(itemId, price) {
+        if (currentUser.pts < price) {
+            showToast("Saldo de joias/pontos insuficiente para efetuar esta compra.", "danger");
+            return;
+        }
+
+        currentUser.pts -= price;
+        if (!currentUser.inventory) currentUser.inventory = [];
+        currentUser.inventory.push(itemId);
+        
+        saveToLocalStorage();
+        document.getElementById('header-pts').innerText = currentUser.pts;
+        showToast("Item adquirido e adicionado à sua conta!", "success");
+        renderStore();
+    }
+
+    /* MÓDULO 6: CURADORIA EXTERNA (LINKS DE OURO) */
+    function renderLinks() {
+        const box = document.getElementById('links-items-box');
+        box.innerHTML = GOLDEN_LINKS.map(l => `
+            <a href="${l.url}" target="_blank" class="link-card">
+                <div>
+                    <h4>${l.name}</h4>
+                    <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">${l.desc}</p>
+                </div>
+                <span style="color:var(--accent); font-size:18px;">➔</span>
+            </a>
+        `).join('');
+    }
+
+    /* MÓDULO 7: PAINEL DO ADMINISTRADOR (METRICAS, LEADERBOARD E CERTIFICADOS) */
+    function renderAdminPanel() {
+        const chartBox = document.getElementById('admin-chart-box');
+        const sortedUsers = [...db.users].sort((a, b) => b.pts - a.pts);
+        
+        if (sortedUsers.length === 0) {
+            chartBox.innerHTML = "<p style='color:var(--text-muted);'>Nenhum aluno cadastrado no sistema.</p>";
+        } else {
+            const maxScore = sortedUsers[0].pts || 1;
+            chartBox.innerHTML = sortedUsers.map(u => {
+                const pct = (u.pts / maxScore) * 100;
+                return `
+                    <div class="chart-row">
+                        <div class="chart-label" title="${u.nome}">${u.nome}</div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: ${pct}%"></div>
+                        </div>
+                        <div class="chart-val">${u.pts} p</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        const tableBody = document.getElementById('admin-users-table-body');
+        tableBody.innerHTML = db.users.map(u => {
+            const invCount = u.inventory ? u.inventory.length : 0;
+            return `
+                <tr>
+                    <td style="font-weight:600;">${u.nome}</td>
+                    <td><span style="color:${u.role==='admin'?'var(--gold)':'var(--text-main)'}">${u.role.toUpperCase()}</span></td>
+                    <td style="color:var(--accent); font-weight:bold;">${u.pts}</td>
+                    <td>${invCount} itens</td>
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn btn-sm btn-inline" onclick="adminGiveMedal('${u.nome}')" title="Conceder Medalha Meritória">🏅 Medalha</button>
+                            <button class="btn btn-sm btn-secondary btn-inline" onclick="adminEmitCertificate('${u.nome}', ${u.pts})" title="Gerar Certificado em PDF">📜 Certificado PDF</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        const logsBox = document.getElementById('admin-logs-box');
+        if (!db.logs || db.logs.length === 0) {
+            logsBox.innerHTML = "<div class='log-line'>Nenhum evento registrado no sistema.</div>";
+        } else {
+            logsBox.innerHTML = db.logs.map(log => `<div class='log-line'>${log}</div>`).join('');
+        }
+    }
+
+    function adminGiveMedal(nomeUsuario) {
+        const medalhaNome = prompt(`Digite o título/nome da medalha para outorgar a ${nomeUsuario}:`, "Destaque da Semana");
+        if (!medalhaNome) return;
+
+        const user = db.users.find(u => u.nome.toLowerCase() === nomeUsuario.toLowerCase());
+        if (user) {
+            if (!user.medals) user.medals = [];
+            user.medals.push(medalhaNome);
+            saveToLocalStorage();
+            showToast(`Medalha outorgada com sucesso para ${user.nome}!`, "success");
+            renderAdminPanel();
+        }
+    }
+
+    /* SISTEMA DE EMISSÃO DE CERTIFICADOS VIA JANELA COMPATÍVEL */
+    function adminEmitCertificate(nomeUsuario, pontos) {
+        const dataEmissao = new Date().toLocaleDateString('pt-BR');
+        const printWindow = window.open('', '_blank', 'width=900,height=650');
+        
+        if(!printWindow) {
+            alert("Erro: O bloqueador de pop-ups do seu navegador impediu a geração do certificado. Por favor, autorize pop-ups para este site.");
+            return;
+        }
+
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <title>Certificado de Excelência Acadêmica</title>
+                <style>
+                    body {
+                        background-color: #ffffff;
+                        color: #1e293b;
+                        font-family: 'Georgia', serif;
+                        padding: 0;
+                        margin: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                    }
+                    .certificate-border {
+                        border: 15px double #1e293b;
+                        padding: 40px;
+                        width: 800px;
+                        background-color: #fffdf9;
+                        text-align: center;
+                        position: relative;
+                        box-sizing: border-box;
+                    }
+                    .certificate-border::before {
+                        content: "";
+                        position: absolute;
+                        top: 10px; left: 10px; right: 10px; bottom: 10px;
+                        border: 2px solid #fbbf24;
+                        pointer-events: none;
+                    }
+                    h1 {
+                        font-size: 42px;
+                        color: #0f172a;
+                        margin-bottom: 5px;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                    }
+                    h2 {
+                        font-size: 20px;
+                        color: #fbbf24;
+                        font-family: 'sans-serif';
+                        margin-top: 0;
+                        margin-bottom: 40px;
+                        letter-spacing: 3px;
+                    }
+                    p {
+                        font-size: 18px;
+                        line-height: 1.8;
+                        margin: 20px 0;
+                    }
+                    .student-name {
+                        font-size: 28px;
+                        font-weight: bold;
+                        text-decoration: underline;
+                        color: #0b0f19;
+                        display: block;
+                        margin: 15px 0;
+                    }
+                    .footer-sig {
+                        margin-top: 50px;
+                        display: flex;
+                        justify-content: space-around;
+                    }
+                    .signature-line {
+                        border-top: 1px solid #444;
+                        width: 250px;
+                        padding-top: 8px;
+                        font-family: 'sans-serif';
+                        font-size: 12px;
+                        color: #64748b;
+                    }
+                    .badge-gold {
+                        font-size: 45px;
+                        margin-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="certificate-border">
+                    <h1>Certificado de Mérito</h1>
+                    <h2>MATEMÁTICA AVANTE PRO</h2>
+                    
+                    <p>Certificamos com distinção e honra acadêmica que o discente</p>
+                    <span class="student-name">${nomeUsuario}</span>
+                    <p>completou com êxito os módulos avançados de resolução matemática, acumulando um total expressivo de <strong>${pontos} pontos gamificados</strong>, demonstrando proficiência, raciocínio lógico analítico e dedicação contínua aos estudos.</p>
+                    
+                    <div class="badge-gold">🏅</div>
+                    
+                    <div class="footer-sig">
+                        <div>
+                            <div class="signature-line">Plataforma Matemática Avante PRO</div>
+                            <div>Coordenação Pedagógica</div>
+                        </div>
+                        <div>
+                            <div class="signature-line">Emitido em: ${dataEmissao}</div>
+                            <div>Chave de Autenticidade Digital</div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `);
+        
+        printWindow.document.close();
+        
+        setTimeout(() => {
+            printWindow.print();
+        }, 500);
+    }
+
+    /* INICIALIZAÇÃO AUTOMÁTICA DA APLICAÇÃO EM WINDOW LOAD */
+    window.onload = () => {
+        if (currentUser) {
+            initApp();
+        }
+    };
+</script>
+
+</body>
+</html>
