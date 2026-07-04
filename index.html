@@ -19,11 +19,6 @@
             --gold: #fbbf24;
             --border: #1e293b;
             --brand-blue: #38bdf8;
-
-            /* Cores das Molduras */
-            --frame-bronze: #cd7f32;
-            --frame-prata: #cbd5e1;
-            --frame-vermelha: #ef4444;
         }
 
         [data-theme="light"] {
@@ -72,26 +67,6 @@
             justify-content: center;
             width: 45px;
             height: 45px;
-        }
-
-        /* NOTIFICAÇÃO TOAST */
-        #toast-container {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
-        }
-        .toast {
-            background: var(--bg-card);
-            border-left: 4px solid var(--accent);
-            color: var(--text-main);
-            padding: 15px 25px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .container {
@@ -166,7 +141,7 @@
             color: var(--text-muted);
             font-size: 14px;
         }
-        input[type="text"], textarea, select {
+        input[type="text"], select {
             width: 100%;
             padding: 12px 16px;
             background-color: var(--bg-input);
@@ -174,10 +149,6 @@
             border-radius: 8px;
             color: var(--text-main);
             font-size: 16px;
-        }
-        input[type="text"]:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--brand-blue);
         }
 
         /* BOTÕES */
@@ -203,7 +174,6 @@
         .btn-secondary:hover { background-color: #334155; }
         .btn-inline { width: auto; }
         .btn-sm { padding: 8px 16px; font-size: 14px; border-radius: 6px; }
-        .btn-danger { background-color: var(--danger); color: white; }
         
         .study-btn {
             background-color: var(--bg-input);
@@ -211,12 +181,9 @@
             border: 1px solid var(--brand-blue);
             margin-bottom: 12px;
         }
-        .study-btn:hover {
-            background-color: var(--brand-blue);
-            color: #ffffff;
-        }
+        .study-btn:hover { background-color: var(--brand-blue); color: #ffffff; }
 
-        /* ABAS E NAVEGAÇÃO */
+        /* NAVEGAÇÃO */
         .app-header {
             display: flex;
             justify-content: space-between;
@@ -224,43 +191,8 @@
             border-bottom: 1px solid var(--border);
             padding-bottom: 15px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
         }
-        .user-summary {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .avatar-container {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            padding: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .avatar-container.frame-item_1 { background: var(--frame-bronze); }
-        .avatar-container.frame-item_2 { background: var(--frame-prata); }
-        .avatar-container.frame-item_3 { background: var(--frame-vermelha); }
-        .avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #0f172a; }
-        
-        .score-badge {
-            background: rgba(251, 191, 36, 0.15);
-            color: var(--gold);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            border: 1px solid rgba(251, 191, 36, 0.3);
-        }
-        .nav-tabs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 25px; }
         .nav-tab-btn {
             background-color: var(--bg-card);
             color: var(--text-muted);
@@ -271,7 +203,6 @@
             font-weight: 600;
         }
         .nav-tab-btn.active { background-color: var(--accent); color: #ffffff; border-color: var(--accent); }
-
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
@@ -289,7 +220,7 @@
         .feedback-box.correct { display: block; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); color: var(--success); }
         .feedback-box.wrong { display: block; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); color: var(--danger); }
 
-        /* MODAL DE ESTUDO COMPLETO (SUBSTITUTO DOS PDFS CAÍDOS) */
+        /* MODAL DE ESTUDO */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -304,12 +235,11 @@
             border: 1px solid var(--border);
             max-width: 650px; width: 90%; max-height: 85vh;
             border-radius: 16px; display: flex; flex-direction: column;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
         }
         .modal-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-body { padding: 20px; overflow-y: auto; font-size: 15px; }
+        .modal-body { padding: 20px; overflow-y: auto; }
         .modal-body h4 { margin: 15px 0 5px 0; color: var(--brand-blue); }
-        .modal-body ul { margin-left: 20px; margin-bottom: 10px; }
+        .modal-body ul { margin-left: 20px; }
 
         .hidden { display: none !important; }
     </style>
@@ -319,8 +249,6 @@
 <div class="theme-toggle-container">
     <button class="theme-btn" id="theme-toggle-btn" onclick="toggleTheme()">🌙</button>
 </div>
-
-<div id="toast-container"></div>
 
 <div class="container">
     <div class="logo-container">
@@ -340,7 +268,7 @@
             <label for="in-role">Tipo de Conta</label>
             <select id="in-role">
                 <option value="aluno">Aluno Estudante</option>
-                <option value="admin">Administrador do Sistema</option>
+                <option value="admin">Administrador</option>
             </select>
         </div>
         <button class="btn" onclick="authLogin()">Entrar na Plataforma →</button>
@@ -348,17 +276,12 @@
 
     <div id="app-screen" class="hidden">
         <div class="card app-header">
-            <div class="user-summary">
-                <div class="avatar-container" id="header-avatar-frame">
-                    <img id="header-avatar" src="" alt="Avatar">
-                </div>
-                <div>
-                    <h3 id="header-name">Carregando...</h3>
-                    <p style="font-size: 13px; color: var(--text-muted);" id="header-role">Aluno</p>
-                </div>
+            <div>
+                <h3 id="header-name">Carregando...</h3>
+                <p style="font-size: 13px; color: var(--text-muted);" id="header-role">Aluno</p>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
-                <div class="score-badge">💎 <span id="header-pts">0</span> Pontos</div>
+                <div style="background: rgba(251, 191, 36, 0.15); color: var(--gold); padding: 6px 14px; border-radius: 20px; font-weight: bold;">💎 <span id="header-pts">0</span> Pontos</div>
                 <button class="btn btn-secondary btn-sm btn-inline" onclick="authLogout()">Sair</button>
             </div>
         </div>
@@ -371,28 +294,25 @@
         <div id="tab-quiz" class="tab-content active card">
             <div id="quiz-selection">
                 <h3>Escolha o seu Nível de Desafio</h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Aviso importante: Estude o módulo completo de revisão antes de acionar o botão do quiz.</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Estude o material didático oficial de revisão real antes de abrir o quiz de 10 perguntas.</p>
                 
                 <div class="quiz-levels">
                     <div class="card" style="margin:0; background: var(--bg-input); text-align:center;">
                         <h4 style="color: #10b981; margin-bottom:10px;">🟢 Nível Fácil</h4>
-                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">Matemática Básica, Frações e Aritmética</p>
                         <button class="btn btn-sm study-btn" onclick="openStudyModal('facil')">📚 Estudar Conteúdo</button>
-                        <button class="btn btn-sm" onclick="startQuiz('facil')">Iniciar Quiz (10 Q)</button>
+                        <button class="btn btn-sm" onclick="startQuiz('facil')">Iniciar Quiz (10 Perguntas)</button>
                     </div>
 
                     <div class="card" style="margin:0; background: var(--bg-input); text-align:center;">
                         <h4 style="color: var(--gold); margin-bottom:10px;">🟡 Nível Médio</h4>
-                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">Equações Lineares, Áreas e Geometria</p>
                         <button class="btn btn-sm study-btn" onclick="openStudyModal('medio')">📚 Estudar Conteúdo</button>
-                        <button class="btn btn-sm" onclick="startQuiz('medio')">Iniciar Quiz (10 Q)</button>
+                        <button class="btn btn-sm" onclick="startQuiz('medio')">Iniciar Quiz (10 Perguntas)</button>
                     </div>
 
                     <div class="card" style="margin:0; background: var(--bg-input); text-align:center;">
                         <h4 style="color: #f87171; margin-bottom:10px;">🔴 Nível Avançado</h4>
-                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">Derivadas, PG e Estatística Básica</p>
                         <button class="btn btn-sm study-btn" onclick="openStudyModal('avancado')">📚 Estudar Conteúdo</button>
-                        <button class="btn btn-sm" onclick="startQuiz('avancado')">Iniciar Quiz (10 Q)</button>
+                        <button class="btn btn-sm" onclick="startQuiz('avancado')">Iniciar Quiz (10 Perguntas)</button>
                     </div>
                 </div>
             </div>
@@ -428,86 +348,26 @@
     <div class="modal-card">
         <div class="modal-header">
             <h3 id="modal-subject-title">Material de Estudo Oficial</h3>
-            <button class="btn btn-sm btn-secondary btn-inline" onclick="closeStudyModal()">Fechar ✕</button>
+            <span id="modal-page-indicator" style="font-size:13px; background:var(--bg-input); padding:4px 10px; border-radius:10px; color:var(--brand-blue);">Páginas do Material</span>
         </div>
-        <div class="modal-body" id="modal-subject-text">
-            </div>
+        <div class="modal-body" id="modal-subject-text"></div>
         <div style="padding:15px; border-top:1px solid var(--border); text-align:right;">
-            <button class="btn btn-sm btn-inline" onclick="closeStudyModal()">Concluí o Estudo! Pronto para o Quiz</button>
+            <button class="btn btn-sm btn-inline" onclick="closeStudyModal()">Finalizar Leitura e Ir pro Quiz</button>
         </div>
     </div>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('db_avante_pro')) || { users: [], logs: [] };
+    let db = JSON.parse(localStorage.getItem('db_avante_pro')) || { users: [] };
     let currentUser = JSON.parse(localStorage.getItem('curr_user_pro')) || null;
     let activeTheme = localStorage.getItem('theme') || 'dark';
 
-    // BANCO DE MATÉRIAS REAIS COMPLETO (CONTEÚDO DO PDF)
     const STUDY_CONTENTS = {
-        facil: `
-            <h2>📖 Apostila Digital: Aritmética e Propriedades Básicas</h2>
-            <p>Este guia reúne toda a fundamentação teórica exigida para a realização do Quiz de Nível Fácil.</p>
-            
-            <h4>1. Ordem das Operações (Precedência)</h4>
-            <p>Nas expressões matemáticas aritméticas, deve-se obedecer rigorosamente à hierarquia dos operadores para evitar erros de cálculo:</p>
-            <ul>
-                <li><strong>1º Lugar:</strong> Multiplicações (×) e Divisões (÷) na ordem em que aparecem.</li>
-                <li><strong>2º Lugar:</strong> Adições (+) e Subtrações (-) posteriores.</li>
-            </ul>
-            <p><i>Exemplo prático:</i> Na expressão 7 + 3 × 4, calcula-se primeiro 3 × 4 = 12. Só depois somamos 7 + 12 = 19.</p>
-
-            <h4>2. Classificação Geométrica de Triângulos</h4>
-            <p>Os triângulos podem ser catalogados de acordo com a proporcionalidade das medidas de seus lados:</p>
-            <ul>
-                <li><strong>Equilátero:</strong> Possui todos os 3 lados com medidas idênticas e ângulos de 60 graus.</li>
-                <li><strong>Isósceles:</strong> Contém apenas 2 lados congruentes (iguais) e 1 diferente.</li>
-                <li><strong>Escaleno:</strong> Todos os 3 lados possuem tamanhos totalmente distintos.</li>
-            </ul>
-
-            <h4>3. Potenciação e Radiciação Básica</h4>
-            <p>A raiz quadrada de um número consiste em encontrar um fator que, multiplicado por si mesmo, resulte no valor sob o radical. Exemplo: A raiz quadrada de 144 é 12, pois 12 × 12 = 144.</p>
-        `,
-        medio: `
-            <h2>📖 Apostila Digital: Álgebra de 1º Grau e Cálculo de Áreas</h2>
-            <p>Consulte este compêndio completo antes de partir para a avaliação prática.</p>
-
-            <h4>1. Resolução de Equações de Primeiro Grau</h4>
-            <p>Resolver uma equação linear consiste em encontrar o valor oculto da incógnita (geralmente representada por <i>x</i>) que torne a igualdade verdadeira. O método principal baseia-se no isolamento:</p>
-            <ul>
-                <li>Termos com variáveis mudam de lado invertendo o sinal algébrico.</li>
-                <li>Termos numéricos puros agrupam-se opostamente.</li>
-            </ul>
-            <p><i>Exemplo prático:</i> 3x + 5 = 2x + 12. Transpondo termos: 3x - 2x = 12 - 5, reduzindo a x = 7.</p>
-
-            <h4>2. Geometria Espacial e Áreas Planas</h4>
-            <p>O cálculo da área superficial de quadriláteros planos retangulares obedece à fórmula clássica da multiplicação de duas dimensões perpendiculares:</p>
-            <p><strong>Área = Base × Altura</strong></p>
-
-            <h4>3. Transposição Linguística para Equação</h4>
-            <p>Interpretar enunciados textuais permite gerar equações. "O triplo de um número mais 4" escreve-se estruturalmente como: 3x + 4.</p>
-        `,
-        avancado: `
-            <h2>📖 Apostila Digital: Cálculo Diferencial, Sequências e Probabilidade</h2>
-            <p>Material técnico essencial para gabaritar o módulo avançado.</p>
-
-            <h4>1. Regra do Tombo para Derivadas</h4>
-            <p>No cálculo diferencial, a derivada mede a taxa de variação instantânea de uma função. Para monômios do tipo <i>axⁿ</i>, aplica-se a regra da potência:</p>
-            <p><strong>d/dx(axⁿ) = n · axⁿ⁻¹</strong></p>
-            <ul>
-                <li>A derivada de variáveis lineares simples resulta apenas no seu coeficiente (ex: derivada de 5x é 5).</li>
-                <li>A derivada de constantes numéricas isoladas é zero.</li>
-            </ul>
-
-            <h4>2. Progressão Geométrica (PG)</h4>
-            <p>Diferente da Progressão Aritmética (soma), a PG cresce por multiplicação constante através de uma razão dada por <i>q</i>. Cada termo sucessivo é encontrado aplicando o multiplicador sobre o termo anterior.</p>
-
-            <h4>3. Teoria de Probabilidade e Frações</h4>
-            <p>A probabilidade de um evento ocorrer baseia-se na razão entre casos favoráveis sobre casos totais possíveis. Para transformar frações em casas decimais exatas, divide-se o numerador pelo denominador correspondente.</p>
-        `
+        facil: `<h2>📖 Apostila: Aritmética e Propriedades Básicas</h2><p style="color:var(--text-muted); margin-bottom:15px;">[Página 1 de 3 do Material de Estudo]</p><h4>1. Ordem das Operações</h4><p>Multiplicações e Divisões têm prioridade absoluta sobre Adições e Subtrações.</p><h4>2. Classificação de Triângulos</h4><p>Equilátero (3 lados iguais), Isósceles (2 lados iguais) e Escaleno (todos os lados diferentes).</p><h4>3. Radiciação</h4><p>A raiz de 144 é 12 pois 12x12=144.</p>`,
+        medio: `<h2>📖 Apostila: Álgebra de 1º Grau e Geometria</h2><p style="color:var(--text-muted); margin-bottom:15px;">[Página 2 de 3 do Material de Estudo]</p><h4>1. Isolar o X</h4><p>Na equação 3x + 5 = 2x + 12, mudamos os termos de lado trocando o sinal algébrico.</p><h4>2. Cálculo de Áreas</h4><p>Área do retângulo = Base × Altura.</p>`,
+        avancado: `<h2>📖 Apostila: Cálculo e Probabilidade Avançada</h2><p style="color:var(--text-muted); margin-bottom:15px;">[Página 3 de 3 do Material de Estudo]</p><h4>1. Regra do Tombo</h4><p>A derivada de axⁿ resulta em n·axⁿ⁻¹.</p><h4>2. Progressão Geométrica (PG)</h4><p>Sequências que crescem multiplicando pela razão fixa q.</p>`
     };
 
-    // BANCO DE DADOS ATUALIZADO COM EXATAMENTE 10 QUESTÕES POR NÍVEL
     const QUIZ_DATABASE = {
         facil: [
             { q: "Qual o valor de 7 + 3 × 4?", o: ["40", "19", "31", "28"], a: 1, e: "Multiplicações primeiro: 3 × 4 = 12. Depois 7 + 12 = 19." },
@@ -515,9 +375,9 @@
             { q: "Qual é a raiz quadrada de 144?", o: ["12", "14", "10", "16"], a: 0, e: "12 × 12 resulta exatamente em 144." },
             { q: "Quanto é a metade de 3/4?", o: ["3/2", "6/4", "3/8", "1/4"], a: 2, e: "Multiplica-se o denominador por 2, resultando em 3/8." },
             { q: "Qual o resultado de 15 - 5 × 2?", o: ["20", "5", "10", "15"], a: 1, e: "Multiplicação primeiro: 5 × 2 = 10. Depois 15 - 10 = 5." },
-            { q: "Como se chama um polígono regular de 5 lados?", o: ["Hexágono", "Quadrado", "Pentágono", "Octógono"], a: 2, e: "Polígonos de 5 lados são Pentágonos." },
+            { q: "Como se chama um polígono de 5 lados?", o: ["Hexágono", "Quadrado", "Pentágono", "Octógono"], a: 2, e: "Polígonos de 5 lados são Pentágonos." },
             { q: "Quanto é 2 elevado à quinta potência (2⁵)?", o: ["10", "25", "32", "16"], a: 2, e: "2 × 2 × 2 × 2 × 2 = 32." },
-            { q: "Se uma pizza foi dividida em 8 pedaços e comi 3, qual fração sobrou?", o: ["3/8", "5/8", "8/3", "1/2"], a: 1, e: "Sobraram 5 pedaços de um total de 8, ou seja, 5/8." },
+            { q: "Se uma pizza dividida em 8 pedaços teve 3 comidos, quanto sobrou?", o: ["3/8", "5/8", "8/3", "1/2"], a: 1, e: "Sobraram 5 pedaços de um total de 8, ou seja, 5/8." },
             { q: "Qual o menor número primo positivo?", o: ["0", "1", "2", "3"], a: 2, e: "O número 2 é o único primo que também é par." },
             { q: "Qual o resultado da operação 1.200 ÷ 100?", o: ["12", "120", "1,2", "1200"], a: 0, e: "Cortamos dois zeros de ambos, resultando em 12." }
         ],
@@ -537,17 +397,16 @@
             { q: "Qual é a derivada da função f(x) = 3x² + 5x - 2?", o: ["f'(x) = 6x + 5", "f'(x) = 3x + 5", "f'(x) = 6x", "f'(x) = 2x"], a: 0, e: "Regra do tombo aplicada: d/dx(3x²) = 6x e d/dx(5x) = 5." },
             { q: "Em uma PG com a₁ = 2 e razão q = 3, qual o terceiro termo (a₃)?", o: ["6", "12", "18", "8"], a: 2, e: "a₁ = 2, a₂ = 2×3 = 6, a₃ = 6×3 = 18." },
             { q: "Qual é a probabilidade de tirar um número par num dado comum de 6 faces?", o: ["1/6", "1/2", "2/3", "1/3"], a: 1, e: "São 3 números pares (2,4,6) de 6 totais -> 3/6 simplifica para 1/2." },
-            { q: "Converta a fração de valor 3/5 para o formato decimal:", o: ["0,35", "0,53", "0,6", "1,6"], a: 2, e: "Dividindo 3 por 5 obtemos exatamente 0,6." },
+            { q: "Conversta a fração de valor 3/5 para o formato decimal:", o: ["0,35", "0,53", "0,6", "1,6"], a: 2, e: "Dividindo 3 por 5 obtemos exatamente 0,6." },
             { q: "Qual o valor do logaritmo de 1000 na base 10?", o: ["2", "3", "4", "10"], a: 1, e: "10 elevado ao cubo (10³) é igual a 1000, logo o logaritmo é 3." },
-            { q: "Se f(x) = ln(x), qual é a sua derivada f'(x)?", o: ["e^x", "1/x", "x", "1"], a: 1, e: "A derivada por tabela da função logarítmica natural ln(x) é 1/x." },
+            { q: "Se f(x) = ln(x), qual é a sua derivada f'(x)?", o: ["e^x", "1/x", "x", "1"], a: 1, e: "A derivada por tabela da função ln(x) é 1/x." },
             { q: "Qual o valor do determinante de uma matriz identidade 3x3?", o: ["0", "1", "3", "9"], a: 1, e: "O determinante de qualquer matriz identidade é sempre igual a 1." },
             { q: "Quantos anagramas possui a palavra MAT?", o: ["3", "6", "9", "2"], a: 1, e: "Número de letras fatorial: 3! = 3 × 2 × 1 = 6." },
             { q: "Qual a soma dos ângulos internos de um hexágono regular?", o: ["360°", "540°", "720°", "900°"], a: 2, e: "Fórmula S = (n-2)×180 -> (6-2)×180 = 4 × 180 = 720°." },
-            { q: "Qual o valor numérico do cosseno de 0 graus?", o: ["0", "0.5", "1", "-1"], a: 2, e: "No ciclo trigonométrico, o cosseno de 0 radianos/graus é igual a 1." }
+            { q: "Qual o valor numérico do cosseno de 0 graus?", o: ["0", "0.5", "1", "-1"], a: 2, e: "No ciclo trigonométrico, o cosseno de 0 graus é igual a 1." }
         ]
     };
 
-    // GERENCIADOR DE TEMAS (MODO CLARO / ESCURO)
     function toggleTheme() {
         const btn = document.getElementById('theme-toggle-btn');
         if (activeTheme === 'dark') {
@@ -562,53 +421,28 @@
         localStorage.setItem('theme', activeTheme);
     }
 
-    // ABERTURA DE MODAL COM OS CONTEÚDOS DOS PDFS
     function openStudyModal(level) {
         document.getElementById('modal-subject-text').innerHTML = STUDY_CONTENTS[level];
+        
+        let pNum = level === 'facil' ? "Parte 1 de 3" : level === 'medio' ? "Parte 2 de 3" : "Parte 3 de 3";
+        document.getElementById('modal-page-indicator').innerText = pNum;
+        
         document.getElementById('study-modal').classList.add('active');
     }
+    
     function closeStudyModal() {
         document.getElementById('study-modal').classList.remove('active');
-    }
-
-    function showToast(message, type = 'success') {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = `toast`;
-        toast.innerHTML = `<span>🔔</span> <div>${message}</div>`;
-        container.appendChild(toast);
-        setTimeout(() => toast.remove(), 3500);
     }
 
     function authLogin() {
         const nomeInput = document.getElementById('in-nome').value.trim();
         const roleSelect = document.getElementById('in-role').value;
         if (!nomeInput) return alert("Digite o seu nome.");
-
-        let user = db.users.find(u => u.nome.toLowerCase() === nomeInput.toLowerCase());
-        if (!user) {
-            user = { nome: nomeInput, role: roleSelect, pts: 0, inventory: [], history: [] };
-            db.users.push(user);
-        }
-        currentUser = user;
-        saveToLocalStorage();
+        currentUser = { nome: nomeInput, role: roleSelect, pts: 0, history: [] };
         initApp();
     }
 
-    function authLogout() {
-        currentUser = null;
-        localStorage.removeItem('curr_user_pro');
-        location.reload();
-    }
-
-    function saveToLocalStorage() {
-        if (currentUser) {
-            const idx = db.users.findIndex(u => u.nome.toLowerCase() === currentUser.nome.toLowerCase());
-            if (idx !== -1) db.users[idx] = currentUser;
-        }
-        localStorage.setItem('db_avante_pro', JSON.stringify(db));
-        if (currentUser) localStorage.setItem('curr_user_pro', JSON.stringify(currentUser));
-    }
+    function authLogout() { currentUser = null; location.reload(); }
 
     function initApp() {
         document.getElementById('login-screen').classList.add('hidden');
@@ -616,7 +450,6 @@
         document.getElementById('header-name').innerText = currentUser.nome;
         document.getElementById('header-role').innerText = currentUser.role === 'admin' ? "👑 Administrador" : "🎓 Aluno";
         document.getElementById('header-pts').innerText = currentUser.pts;
-        document.getElementById('header-avatar').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/></svg>";
         renderHistory();
     }
 
@@ -627,7 +460,6 @@
         document.getElementById(`tab-${tabId}`).classList.add('active');
     }
 
-    /* SISTEMA DO QUIZ ATIVO */
     let activeQuiz = { level: '', questions: [], currentIndex: 0, correctCount: 0, answered: false };
 
     function startQuiz(level) {
@@ -693,7 +525,6 @@
             const finalPts = activeQuiz.correctCount * 10;
             currentUser.pts += finalPts;
             currentUser.history.unshift({ level: activeQuiz.level, score: activeQuiz.correctCount, total: activeQuiz.questions.length });
-            saveToLocalStorage();
             
             alert(`Parabéns! Você concluiu as 10 questões!\nAcertos: ${activeQuiz.correctCount}/10\nPontos recebidos: +${finalPts} 💎`);
             document.getElementById('quiz-active-box').classList.add('hidden');
@@ -716,10 +547,7 @@
         `).join('');
     }
 
-    window.onload = () => {
-        if (localStorage.getItem('theme') === 'light') toggleTheme();
-        if (currentUser) initApp();
-    };
+    window.onload = () => { if (localStorage.getItem('theme') === 'light') toggleTheme(); };
 </script>
 </body>
 </html>
