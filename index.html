@@ -255,6 +255,7 @@
             position: relative;
             overflow: hidden;
             display: inline-block;
+            cursor: pointer;
         }
         .file-input-wrapper input[type=file] {
             position: absolute;
@@ -472,7 +473,7 @@
 
 <div class="container">
     <div class="logo-container">
-        <img class="logo-img" id="main-logo" src="star-blue.jpg" alt="Matemática Avante PRO" onerror="handleLogoError()">
+        <img class="logo-img" id="main-logo" src="logo.jpg" alt="Matemática Avante PRO" onerror="handleLogoError()">
         <div id="logo-fallback-element" class="logo-fallback hidden">
             🧮 <span>Matemática</span> Avante PRO
         </div>
@@ -695,7 +696,7 @@
         medio: [
             { q: "Qual o valor de x na equação 3x + 5 = 2x + 12?", o: ["x = 5", "x = 7", "x = 17", "x = 4"], a: 1, e: "Passando as incógnitas para o lado esquerdo e os coeficientes independentes para o direito: 3x - 2x = 12 - 5 -> x = 7." },
             { q: "A área de um círculo com raio de 3 metros é de aproximadamente: (Considere π = 3,14)", o: ["28,26 m²", "18,84 m²", "9,42 m²", "25,12 m²"], a: 0, e: "Fórmula da área do círculo: A = π × r². Substituindo os valores: A = 3.14 × 3² = 3.14 × 9 = 28.26 m²." },
-            { q: "Em um triângulo retângulo, se os catetos medem 6cm e 8cm, quanto mede a hipotenusa?", o: ["10cm", "14cm", "12cm", "9cm"], a: 0, e: "Teorema di Pitágoras: h² = c₁² + c₂² -> h² = 6² + 8² = 36 + 64 = 100. Logo, h = √100 = 10cm." },
+            { q: "Em um triângulo retângulo, se os catetos medem 6cm e 8cm, quanto mede a hipotenusa?", o: ["10cm", "14cm", "12cm", "9cm"], a: 0, e: "Teorema de Pitágoras: h² = c₁² + c₂² -> h² = 6² + 8² = 36 + 64 = 100. Logo, h = √100 = 10cm." },
             { q: "Qual a probabilidade de lançar um dado comum de 6 faces e sair um número par?", o: ["1/3", "1/2", "2/3", "1/6"], a: 1, e: "Casos favoráveis (números pares: 2, 4, 6) = 3. Casos totais = 6. Probabilidade = 3/6 que simplificado resulta em 1/2." },
             { q: "Qual é o valor do logaritmo log₁₀(1000)?", o: ["2", "4", "1", "3"], a: 3, e: "O logaritmo pergunta a qual expoente devemos elevar a base 10 para obter 1000. Como 10³ = 1000, o resultado do logaritmo é 3." },
             { q: "Se a progressão aritmética (PA) inicia com termo a₁ = 3 e razão r = 4, qual o quinto termo?", o: ["15", "19", "23", "16"], a: 1, e: "Fórmula do termo geral da PA: a_n = a₁ + (n-1)×r. Para n=5: a₅ = 3 + (5-1)×4 = 3 + 4×4 = 3 + 16 = 19." },
@@ -870,7 +871,7 @@
         saveToLocalStorage();
         
         document.getElementById('header-name').innerText = currentUser.nome;
-        showToast("Perfil atualizado com sucesso!", "success");
+        showToast("Perfil updated com sucesso!", "success");
     }
 
     function uploadAvatar(event) {
