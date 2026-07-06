@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matemática Avante - Plataforma Suprema</title>
     <style>
-        /* TEMAS EXCLUSIVOS DA LOJA DE PERSONALIZAÇÃO */
+        /* CONFIGURAÇÃO DE PALETAS DE CORES E TEMAS EXCLUSIVOS DA LOJA */
         :root {
             --bg-main: #0b0f19;
             --bg-card: #151f32;
@@ -75,7 +75,7 @@
             padding: 20px;
         }
 
-        /* LOGO ARREDONDADA E TITULO CHIQUE */
+        /* LOGO ARREDONDADA COM BORDA VERMELHA E TÍTULO EM AZUL CLARO */
         .logo-container {
             text-align: center;
             padding: 15px 0;
@@ -109,7 +109,7 @@
             letter-spacing: 1px;
         }
 
-        /* CARDS E LAYOUT */
+        /* CONFIGURAÇÃO DE CARDS */
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
@@ -119,7 +119,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        /* COMPONENTES DE AVATAR / FOTO DE PERFIL */
+        /* FOTOS DE PERFIL (AVATARS) */
         .avatar-frame {
             width: 90px;
             height: 90px;
@@ -135,7 +135,7 @@
             border: 2px solid var(--accent);
         }
 
-        /* ABAS DE NAVEGAÇÃO SUPERIOR */
+        /* MENUS E NAVEGAÇÃO */
         .nav-tabs {
             display: flex;
             gap: 8px;
@@ -161,7 +161,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* FORMULÁRIOS */
+        /* INPUTS E FORMULÁRIOS */
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 6px; color: var(--text-muted); font-size: 14px; }
         input[type="text"], input[type="password"], select {
@@ -180,7 +180,7 @@
         .btn-secondary { background-color: #475569; }
         .btn-sm { padding: 6px 12px; font-size: 13px; border-radius: 6px; }
 
-        /* LISTA DE OPÇÕES DO QUIZ */
+        /* ELEMENTOS DO ENGINE DO QUIZ */
         .options-list { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
         .option-btn {
             background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main);
@@ -189,7 +189,7 @@
         .option-btn.correct { background: rgba(16, 185, 129, 0.25) !important; border-color: var(--success) !important; color: #ffffff; }
         .option-btn.wrong { background: rgba(239, 68, 68, 0.25) !important; border-color: var(--danger) !important; color: #ffffff; }
 
-        /* ELEMENTOS VISUAIS */
+        /* RECOMPENSAS E BARRAS DE PROGRESSO */
         .medal-badge {
             display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.12);
             border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px; border-radius: 20px; font-size: 13px; font-weight: bold; margin: 3px;
@@ -197,7 +197,7 @@
         .progress-container { background: var(--bg-input); height: 12px; border-radius: 6px; width: 100%; margin: 15px 0; overflow: hidden; }
         .progress-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
 
-        /* GRÁFICO SIMULADO DO ADMIN */
+        /* GRÁFICO DO ADMIN */
         .chart-mockup {
             display: flex; align-items: flex-end; justify-content: space-between; height: 160px;
             background: var(--bg-input); border-radius: 12px; padding: 15px; margin-top: 15px; border: 1px solid var(--border);
@@ -206,7 +206,7 @@
         .chart-bar span { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-main); }
         .chart-label { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 5px; }
 
-        /* CHAT BOX CONTAINER */
+        /* SISTEMA DE CONVERSAS (CHAT) */
         .chat-container {
             background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; height: 220px;
             overflow-y: auto; padding: 15px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px;
@@ -214,7 +214,7 @@
         .chat-msg { background: var(--bg-card); padding: 8px 12px; border-radius: 8px; max-width: 80%; width: fit-content; font-size: 14px; }
         .chat-msg.me { background: var(--brand-blue); color: #000; align-self: flex-end; }
 
-        /* MODAIS */
+        /* MODAL */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75);
             display: flex; justify-content: center; align-items: center; z-index: 3000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
@@ -254,7 +254,7 @@
             <label>Senha de Administrador</label>
             <input type="password" id="auth-pass" placeholder="Digite a chave master">
         </div>
-        <button class="btn btn-block" onclick="handleAuth()">Entrar no Sistema Celestial →</button>
+        <button class="btn btn-block" onclick="handleAuth()">Entrar no Sistema →</button>
     </div>
 
     <div id="screen-dashboard" class="hidden">
@@ -310,7 +310,7 @@
                     <span id="gameplay-counter" style="font-size: 14px; color: var(--text-muted);">Questão 1 de 10</span>
                 </div>
                 <div class="progress-container"><div id="gameplay-progress-bar" class="progress-fill"></div></div>
-                <p id="gameplay-question-text" class="question-text" style="margin-top: 15px;"></p>
+                <p id="gameplay-question-text" class="question-text" style="margin-top: 15px; font-weight: 600; font-size: 19px;"></p>
                 <div id="gameplay-options-box" class="options-list"></div>
                 
                 <div id="gameplay-feedback-box" class="card hidden" style="background: var(--bg-input); margin-top: 15px;">
@@ -374,17 +374,17 @@
             <p style="color: var(--text-muted); margin-bottom: 20px;">Use os pontos acumulados resolvendo os questionários para customizar a interface visual do seu ambiente.</p>
             <div class="grid-3">
                 <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
-                    <h4>Fundo Cyber Dark</h4>
+                    <h4>Fundo Cyber Dark (Padrão)</h4>
                     <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Tema escuro com detalhes em Neon Vermelho.</p>
                     <button class="btn btn-sm btn-block" onclick="buyTheme('dark-cyber', 0)">Equipar (Grátis)</button>
                 </div>
                 <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
-                    <h4>Luminosidade Clean</h4>
+                    <h4>Luminosidade Clean ☀️</h4>
                     <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Fundo totalmente claro focado em leitura diurna.</p>
                     <button class="btn btn-sm btn-block btn-secondary" id="shop-btn-light" onclick="buyTheme('light-clean', 150)">Comprar por 150 💎</button>
                 </div>
                 <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
-                    <h4>Código Matrix</h4>
+                    <h4>Código Matrix 🌙⭐</h4>
                     <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Estilo hacker cibernético com cores verdes radiantes.</p>
                     <button class="btn btn-sm btn-block btn-secondary" id="shop-btn-matrix" onclick="buyTheme('matrix-green', 300)">Comprar por 300 💎</button>
                 </div>
@@ -399,7 +399,7 @@
         <div id="tab-links" class="tab-content card">
             <h3>Biblioteca Externa de Matemática</h3>
             <p style="color: var(--text-muted); margin-bottom: 20px;">Portais recomendados para pesquisa complementar, olimpíadas e ferramentas científicas.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
                 <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://pt.khanacademy.org" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">1. Khan Academy Brasil 🌐</a><p style="font-size:12px; color:var(--text-muted);">Aulas gratuitas do básico ao avançado.</p></div>
                 <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.geogebra.org" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">2. GeoGebra Calculadora Gráfica 🌐</a><p style="font-size:12px; color:var(--text-muted);">Cálculo de funções e geometria tridimensional.</p></div>
                 <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="http://www.obmep.org.br" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">3. Portal Oficial OBMEP 🌐</a><p style="font-size:12px; color:var(--text-muted);">Provas antigas e banco de problemas olímpicos.</p></div>
@@ -424,11 +424,11 @@
                 <div class="card" style="margin:0; background:var(--bg-input);"><h5>Chaves de Log Ativas</h5><h2 id="adm-stat-logs" style="color: #ef4444;">0</h2></div>
             </div>
 
-            <h4 style="margin-top: 30px;">📈 Gráfico de Distribuição e Desempenho</h4>
+            <h4 style="margin-top: 30px;">📈 Gráfico de Desenvolvimento do Sistema</h4>
             <div class="chart-mockup">
                 <div class="chart-bar" style="height: 35%; background: #10b981;"><span>35%</span><div class="chart-label" style="margin-top:60px;">Fácil</div></div>
                 <div class="chart-bar" style="height: 55%; background: var(--gold);"><span>55%</span><div class="chart-label" style="margin-top:90px;">Médio</div></div>
-                <div class="chart-bar" style="height: 20%; background: #ef4444;"><span>20%</span><div class="chart-label" style="margin-top:35px;">Avançados</div></div>
+                <div class="chart-bar" style="height: 20%; background: #ef4444;"><span>20%</span><div class="chart-label" style="margin-top:35px;">Avançado</div></div>
                 <div class="chart-bar" style="height: 70%; background: var(--brand-blue);"><span>70%</span><div class="chart-label" style="margin-top:115px;">Acessos</div></div>
             </div>
 
@@ -445,30 +445,30 @@
     <div class="modal-card">
         <div class="modal-body">
             <div id="modal-study-core-content"></div>
-            <button class="btn btn-block" style="margin-top:25px;" onclick="closeStudyModal()">Finalizar Estudo Avançado e Iniciar Simulado</button>
+            <button class="btn btn-block" style="margin-top:25px;" onclick="closeStudyModal()">Finalizar Estudo Avançado e Ir para o Simulado</button>
         </div>
     </div>
 </div>
 
 <script>
-    // BANCO DE DADOS LOCAL ENGINE (PERSISTIDO EM LOCALSTORAGE)
+    // SISTEMA DE ENGINE E PERSISTÊNCIA DE ARQUIVOS LOCALSTORAGE
     let systemDB = JSON.parse(localStorage.getItem('avante_system_db')) || {
         users: {},
         logs: [],
-        themesBought: { "Maria Luz": ["dark-cyber"] }
+        themesBought: {}
     };
 
     let sessionUser = null;
     let targetChatUser = null;
 
-    // CONTEÚDOS DIDÁTICOS PROFUNDOS REALISTAS
+    // MATERIAIS DE ESTUDO COMPLETOS E REALISTAS
     const REAL_ACADEMIC_STUDIES = {
-        facil: `<h2>Apostila Matemática Básica: Estruturas Iniciais</h2><hr><br><h4>A Hierarquia Numérica</h4><p>Na matemática computacional e pura, as operações obedecem a uma ordem estrita de precedência conhecida como regra PEMDAS. Multiplicações e divisões devem ser executadas de forma prioritária, antes de adições ou subtrações, independentemente da posição física na escrita da linha.</p><br><h4>Propriedades Geométricas dos Polígonos</h4><p>Os triângulos são figuras fundamentais. Classificam-se quanto aos lados em Equilátero (três segmentos perfeitamente idênticos), Isósceles (duas arestas idênticas e uma base variante) e Escaleno (todas as medidas com distorção total).</p>`,
-        medio: `<h2>Apostila de Álgebra Linear e Funções Planas</h2><hr><br><h4>Equações Lineares com Variáveis</h4><p>A resolução de sentenças de primeiro grau exige o isolamento completo da incógnita fundamental através da transposição de termos. Ao cruzar o sinal de igualdade, o operador aritmético sofre inversão simétrica automática: adição vira subtração e multiplicação converte-se em divisão.</p><br><h4>Cálculos Espaciais Bidimensionais</h4><p>A mensuração de áreas em superfícies retangulares ou quadradas é dada pela modelagem de duas dimensões ortogonais, multiplicando a magnitude da Base pela magnitude da Altura perpendicular.</p>`,
-        avancado: `<h2>Apostila de Cálculo Diferencial e Probabilidade Composta</h2><hr><br><h4>A Teoria da Diferenciação</h4><p>A derivada de uma função representa matematicamente a sua taxa de variação instantânea. Pela Regra do Tombo, o expoente de uma potência de X cai para a base multiplicando todo o termo, enquanto o expoente residual perde exatamente uma unidade inteira de valor.</p><br><h4>Análise Combinatória Avançada</h4><p>Os anagramas determinam o rearranjo fatorial de caracteres textuais. Palavras sem repetição de letras calculam-se diretamente aplicando a função fatorial sobre a quantidade total de símbolos constitutivos.</p>`
+        facil: `<h2>Apostila Matemática Básica: Estruturas Iniciais</h2><br><p>Na matemática computacional e pura, as operações obedecem a uma ordem estrita de precedência conhecida como regra PEMDAS. Multiplicações e divisões devem ser executadas de forma prioritária, antes de adições ou subtrações, independentemente da posição física na escrita da linha.</p><br><h4>Propriedades Geométricas dos Polígonos</h4><p>Os triângulos são figuras fundamentais. Classificam-se quanto aos lados em Equilátero (três segmentos perfeitamente idênticos), Isósceles (duas arestas idênticas e uma base variante) e Escaleno (todas as medidas com distorção total).</p>`,
+        medio: `<h2>Apostila de Álgebra Linear e Funções Planas</h2><br><p>A resolução de sentenças de primeiro grau exige o isolamento completo da incógnita fundamental através da transposição de termos. Ao cruzar o sinal de igualdade, o operador aritmético sofre inversão simétrica automática: adição vira subtração e multiplicação converte-se em divisão.</p><br><h4>Cálculos Espaciais Bidimensionais</h4><p>A mensuração de áreas em superfícies retangulares ou quadradas é dada pela modelagem de duas dimensões ortogonais, multiplicando a magnitude da Base pela magnitude da Altura perpendicular.</p>`,
+        avancado: `<h2>Apostila de Cálculo Diferencial e Probabilidade Composta</h2><br><p>A derivada de uma função representa matematicamente a sua taxa de variação instantânea. Pela Regra do Tombo, o expoente de uma potência de X cai para a base multiplicando todo o termo, enquanto o expoente residual perde exatamente uma unidade inteira de valor.</p><br><h4>Análise Combinatória Avançada</h4><p>Os anagramas determinam o rearranjo fatorial de caracteres textuais. Palavras sem repetição de letras calculam-se diretamente aplicando a função fatorial sobre a quantidade total de símbolos constitutivos.</p>`
     };
 
-    // BANCO DE DADOS OFICIAL: EXATAMENTE 10 QUESTÕES POR NÍVEL
+    // BANCO DE DADOS INTEGRAL COM 30 QUESTÕES REAIS
     const DETAILED_QUESTIONS = {
         facil: [
             { q: "Qual o valor de 7 + 3 × 4?", o: ["40", "19", "31", "28"], a: 1, e: "Multiplicações vêm primeiro: 3 × 4 = 12. Somando 7, resulta em 19." },
@@ -486,9 +486,9 @@
             { q: "Qual o valor de x na equação linear 3x + 5 = 2x + 12?", o: ["x = 5", "x = 7", "x = 12", "x = 4"], a: 1, e: "Agrupando termos: 3x - 2x = 12 - 5, concluindo que x = 7." },
             { q: "Determine a área de um retângulo com base de 8cm e altura de 5cm.", o: ["13 cm²", "40 cm²", "26 cm²", "20 cm²"], a: 1, e: "Área = Base × Altura. Sendo assim, 8 × 5 = 40 cm²." },
             { q: "O triplo de um número somado com 4 é igual a 25. Que número é esse?", o: ["6", "7", "8", "9"], a: 1, e: "Montagem: 3x + 4 = 25 -> 3x = 21 -> x = 7." },
-            { q: "Qual a abertura angular exata de um ângulo reto?", o: ["45°", "90°", "180°", "360°"], a: 1, e: "Ângulos retos medem por convenção geométrica exatos 90 graus." },
+            { q: "Qual a abertura angular exata de um ângulo resto?", o: ["45°", "90°", "180°", "360°"], a: 1, e: "Ângulos retos medem por convenção geométrica exatos 90 graus." },
             { q: "Ache o valor de x para: x/2 + 3 = 7.", o: ["x = 8", "x = 4", "x = 2", "x = 10"], a: 0, e: "Subtraindo 3: x/2 = 4. Multiplicando pelo divisor: x = 4 × 2 = 8." },
-            { q: "Qual o perímetro de um quadrado cuja área interna totaliza 36 cm²?", o: ["6 cm", "12 cm", "24 cm", "36 cm"], a: 2, e: "Lado = √36 = 6cm. Perímetro soma os 4 lados: 6 × 4 = 24cm." },
+            { q: "Qual o perimeter de um quadrado cuja área interna totaliza 36 cm²?", o: ["6 cm", "12 cm", "24 cm", "36 cm"], a: 2, e: "Lado = √36 = 6cm. Perímetro soma os 4 lados: 6 × 4 = 24cm." },
             { q: "Qual o valor numérico para a expressão x² - 3x adotando x = 5?", o: ["10", "15", "25", "5"], a: 0, e: "Substituindo: 5² - 3(5) = 25 - 15 = 10." },
             { q: "Num triângulo retângulo, se os catetos valem 3 e 4, a hipotenusa vale:", o: ["5", "7", "12", "25"], a: 0, e: "Teorema de Pitágoras: h² = 3² + 4² = 9 + 16 = 25. Tirando a raiz, obtemos 5." },
             { q: "O coeficiente angular de uma equação de reta exprime geometricamente a:", o: ["Área total", "Inclinação da reta", "Interseção com X", "Distância"], a: 1, e: "Representa a declividade ou grau de inclinação da reta gráfica." },
@@ -515,14 +515,14 @@
         document.getElementById('admin-pass-box').className = role === 'admin' ? "form-group" : "form-group hidden";
     }
 
-    // AUTENTICAÇÃO E LOGS DE HORÁRIO EM TEMPO REAL
+    // REGISTRO DE ENTRADAS E SAÍDAS COM HORÁRIO REAL
     function handleAuth() {
         const name = document.getElementById('auth-name').value.trim();
         const role = document.getElementById('auth-role').value;
         const pass = document.getElementById('auth-pass').value;
 
-        if (!name) return alert("Por favor, preencha o campo de nome completo!");
-        if (role === 'admin' && pass !== '123') return alert("Senha mestra de administrador inválida!");
+        if (!name) return alert("Por favor, digite seu nome completo!");
+        if (role === 'admin' && pass !== '123') return alert("Chave master inválida!");
 
         const timeStamp = new Date().toLocaleTimeString('pt-BR');
 
@@ -532,7 +532,7 @@
         }
 
         sessionUser = systemDB.users[name];
-        systemDB.logs.push(`[${timeStamp}] 🟢 ${sessionUser.name} (${sessionUser.role.toUpperCase()}) conectou à plataforma.`);
+        systemDB.logs.push(`[${timeStamp}] 🟢 ${sessionUser.name} (${sessionUser.role.toUpperCase()}) logou no sistema.`);
         saveDB();
 
         applyVisualTheme(sessionUser.activeTheme);
@@ -542,7 +542,7 @@
     function logout() {
         if (sessionUser) {
             const timeStamp = new Date().toLocaleTimeString('pt-BR');
-            systemDB.logs.push(`[${timeStamp}] 🔴 ${sessionUser.name} encerrou a sessão de estudos.`);
+            systemDB.logs.push(`[${timeStamp}] 🔴 ${sessionUser.name} desconectou.`);
             saveDB();
         }
         sessionUser = null;
@@ -559,10 +559,10 @@
         document.getElementById('screen-dashboard').classList.remove('hidden');
 
         document.getElementById('dash-welcome').innerText = `Olá, ${sessionUser.name}`;
-        document.getElementById('dash-role-badge').innerText = sessionUser.role === 'admin' ? "👑 ADMINISTRADOR" : "🎓 ESTUDANTE MATEMÁTICO";
+        document.getElementById('dash-role-badge').innerText = sessionUser.role === 'admin' ? "👑 ADMINISTRADOR" : "🎓 ESTUDANTE";
         document.getElementById('dash-points').innerText = sessionUser.points;
         
-        const avatarImg = sessionUser.avatar || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2338bdf8\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'%23151f32\' stroke=\'%2338bdf8\' stroke-width=\'1\'/><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z\'/></svg>';
+        const avatarImg = sessionUser.avatar || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2338bdf8\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'none\' stroke=\'%2338bdf8\' stroke-width=\'1\'/><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z\'/></svg>';
         document.getElementById('dash-avatar').src = avatarImg;
         document.getElementById('profile-avatar-display').src = avatarImg;
         document.getElementById('profile-name-input').value = sessionUser.name;
@@ -582,7 +582,7 @@
         document.getElementById(`tab-${tabId}`).classList.add('active');
     }
 
-    // CARREGAR FOTO DA SUA GALERIA DE VERDADE
+    // CARREGAMENTO DE IMAGEM DA GALERIA DO DISPOSITIVO
     function uploadAvatarImage() {
         const file = document.getElementById('profile-file-input').files[0];
         if (!file) return;
@@ -599,7 +599,7 @@
 
     function saveProfileChanges() {
         const newName = document.getElementById('profile-name-input').value.trim();
-        if (!newName) return alert("O nome não pode ficar vazio!");
+        if (!newName) return alert("O nome deve conter caracteres válidos.");
         
         if (newName !== sessionUser.name) {
             delete systemDB.users[sessionUser.name];
@@ -607,11 +607,11 @@
             systemDB.users[newName] = sessionUser;
             saveDB();
         }
-        alert("Dados cadastrais modificados com sucesso!");
+        alert("Modificações salvas com sucesso!");
         renderDashboard();
     }
 
-    // CONQUISTAS E MEDALHAS
+    // PROCESSAMENTO DE RECOMPENSAS POR MEDALHAS
     function checkAndAwardMedals() {
         let m = sessionUser.medals || [];
         if (sessionUser.points >= 50 && !m.includes("Iniciante de Bronze 🥉")) m.push("Iniciante de Bronze 🥉");
@@ -625,20 +625,20 @@
     function renderMedals() {
         const box = document.getElementById('profile-medals-box');
         if (!sessionUser.medals || sessionUser.medals.length === 0) {
-            box.innerHTML = "<p style='color: var(--text-muted); font-size:14px;'>Resolva Quizzes para desbloquear condecorações honorárias.</p>";
+            box.innerHTML = "<p style='color: var(--text-muted); font-size:14px;'>Ainda sem medalhas conquistadas.</p>";
             return;
         }
         box.innerHTML = sessionUser.medals.map(med => `<span class="medal-badge">${med}</span>`).join('');
     }
 
-    // LEITURA DETALHADA E MATÉRIA DIDÁTICA
+    // INTERFACE DE MATÉRIA ACADÊMICA
     function openStudy(lvl) {
         document.getElementById('modal-study-core-content').innerHTML = REAL_ACADEMIC_STUDIES[lvl];
         document.getElementById('modal-study').classList.add('active');
     }
     function closeStudyModal() { document.getElementById('modal-study').classList.remove('active'); }
 
-    // MECÂNICA COMPLETA DE 10 QUESTÕES NO QUIZ COM GABARITO NO FINAL
+    // MECÂNICA DINÂMICA DE 10 PERGUNTAS E GABARITO FINAL
     let activeEngine = { lvl: '', idx: 0, hits: 0, historyLog: [] };
 
     function initiateQuiz(level) {
@@ -685,7 +685,7 @@
 
         activeEngine.historyLog.push({ q: dataset.q, userAns: dataset.o[chosenIdx], rightAns: dataset.o[dataset.a], correct: isCorrect });
 
-        document.getElementById('gameplay-feedback-title').innerText = isCorrect ? "🎯 Muito bem, assertivo!" : "❌ Resposta incorreta!";
+        document.getElementById('gameplay-feedback-title').innerText = isCorrect ? "🎯 Resposta Correta!" : "❌ Incorreto.";
         document.getElementById('gameplay-feedback-desc').innerText = dataset.e;
         document.getElementById('gameplay-feedback-box').classList.remove('hidden');
         document.getElementById('gameplay-next-btn').classList.remove('hidden');
@@ -696,7 +696,6 @@
         if (activeEngine.idx < DETAILED_QUESTIONS[activeEngine.lvl].length) {
             renderQuizQuestion();
         } else {
-            // FIM DO QUIZ DE 10 PERGUNTAS - PROCESSAR RECOMPENSAS
             const reward = activeEngine.hits * 15;
             sessionUser.points += reward;
             systemDB.users[sessionUser.name].points = sessionUser.points;
@@ -705,9 +704,9 @@
             document.getElementById('quiz-gameplay-view').classList.add('hidden');
             document.getElementById('quiz-result-view').classList.remove('hidden');
             
-            document.getElementById('result-summary-text').innerText = `Você completou todas as 10 perguntas! Acertou ${activeEngine.hits} de 10. Recompensa: +${reward} 💎`;
+            document.getElementById('result-summary-text').innerText = `Você concluiu o teste! Acertos: ${activeEngine.hits}/10. Saldo: +${reward} 💎`;
             
-            // CONSTRUÇÃO COMPLETA DO GABARITO REQUISITADO
+            // CONSTRUTOR DE RELATÓRIO DO GABARITO
             const gabaritoBox = document.getElementById('result-gabarito-box');
             gabaritoBox.innerHTML = activeEngine.historyLog.map((item, id) => `
                 <div style="background: var(--bg-input); padding: 12px; border-radius: 8px; border-left: 5px solid ${item.correct ? 'var(--success)' : 'var(--danger)'};">
@@ -726,12 +725,11 @@
         document.getElementById('quiz-hub-view').classList.remove('hidden');
     }
 
-    // ENGINE DE PESQUISA DE COLEGAS, VISUALIZAÇÃO E CHAT INTEGRADO
+    // LOCALIZADOR DE AMIGOS E SESSÕES DE CONVERSA (CHAT)
     function searchPeers() {
         const query = document.getElementById('social-search-input').value.trim().toLowerCase();
         const box = document.getElementById('social-results-box');
         box.innerHTML = "";
-        
         if (!query) return;
 
         Object.keys(systemDB.users).forEach(key => {
@@ -739,12 +737,11 @@
             if (usr.name.toLowerCase().includes(query) && usr.name !== sessionUser.name) {
                 const item = document.createElement('div');
                 item.style = "background: var(--bg-input); padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;";
-                
                 const medHtml = usr.medals.map(m => `<span class="medal-badge" style="font-size:10px; padding:2px 6px;">${m}</span>`).join('');
                 
                 item.innerHTML = `
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <img class="avatar-frame avatar-sm" src="${usr.avatar || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2338bdf8\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'%23151f32\' stroke=\'%2338bdf8\' stroke-width=\'1\'/><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z\'/></svg>'}" alt="Avatar">
+                        <img class="avatar-frame avatar-sm" src="${usr.avatar || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2338bdf8\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'none\' stroke=\'%2338bdf8\' stroke-width=\'1\'/><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z\'/></svg>'}" alt="Avatar">
                         <div>
                             <strong>${usr.name}</strong> <span style="font-size:12px; color:var(--gold);">💎 ${usr.points} Pontos</span>
                             <div style="margin-top:4px;">${medHtml || '<span style="font-size:11px; color:var(--text-muted);">Sem medalhas</span>'}</div>
@@ -767,7 +764,6 @@
     function renderChatHistory() {
         const historyBox = document.getElementById('chat-history');
         historyBox.innerHTML = "";
-        
         if (!sessionUser.chatHistory) sessionUser.chatHistory = {};
         const msgs = sessionUser.chatHistory[targetChatUser] || [];
 
@@ -792,7 +788,6 @@
         sessionUser.chatHistory[targetChatUser].push(payload);
         systemDB.users[sessionUser.name].chatHistory = sessionUser.chatHistory;
 
-        // Sincronizar no banco de dados do colega destinatário
         if (!systemDB.users[targetChatUser].chatHistory) systemDB.users[targetChatUser].chatHistory = {};
         if (!systemDB.users[targetChatUser].chatHistory[sessionUser.name]) systemDB.users[targetChatUser].chatHistory[sessionUser.name] = [];
         systemDB.users[targetChatUser].chatHistory[sessionUser.name].push(payload);
@@ -802,7 +797,7 @@
         renderChatHistory();
     }
 
-    // LOJA DE CUSTOMIZAÇÃO POR PONTOS DO QUIZ
+    // PROCESSAMENTO DE TEMAS DA LOJA DE COSMÉTICOS
     function buyTheme(themeName, cost) {
         if (!systemDB.themesBought[sessionUser.name]) systemDB.themesBought[sessionUser.name] = ["dark-cyber"];
         
@@ -811,7 +806,7 @@
             systemDB.users[sessionUser.name].activeTheme = themeName;
             saveDB();
             applyVisualTheme(themeName);
-            alert("Tema visual aplicado de forma imediata!");
+            alert("Tema aplicado com sucesso!");
             return;
         }
 
@@ -823,23 +818,22 @@
             systemDB.users[sessionUser.name].activeTheme = themeName;
             saveDB();
             applyVisualTheme(themeName);
-            alert("Tema comprado e equipado com absoluto sucesso!");
+            alert("Compra realizada com sucesso!");
             renderDashboard();
         } else {
-            alert(`Pontuação insuficiente! Você necessita de ${cost} pontos.`);
+            alert(`Pontuação insuficiente! Requer ${cost} pontos.`);
         }
     }
 
     function syncShopButtons() {
         if (!sessionUser || !systemDB.themesBought[sessionUser.name]) return;
         const list = systemDB.themesBought[sessionUser.name];
-
         if (list.includes('light-clean')) document.getElementById('shop-btn-light').innerText = "Equipar Tema";
         if (list.includes('matrix-green')) document.getElementById('shop-btn-matrix').innerText = "Equipar Tema";
         if (list.includes('sunset-red')) document.getElementById('shop-btn-sunset').innerText = "Equipar Tema";
     }
 
-    // PAINEL ANALÍTICO COMPLETO DO ADMINISTRADOR
+    // PAINEL ANALÍTICO COMPLETO DO ADM
     function updateAdminPanel() {
         const uKeys = Object.keys(systemDB.users);
         document.getElementById('adm-stat-users').innerText = uKeys.length;
@@ -854,9 +848,7 @@
         document.getElementById('adm-stat-pts').innerText = totalPts;
         document.getElementById('adm-stat-logs').innerText = systemDB.logs.length;
 
-        // Ordenação do Leaderboard por pontos decrescentes
         rankingArr.sort((a,b) => b.pts - a.pts);
-        
         const rankTable = document.getElementById('adm-ranking-table');
         rankTable.innerHTML = rankingArr.map((u, i) => `
             <div style="display:flex; justify-content:space-between; border-bottom: 1px solid var(--border); padding: 6px 0; font-size:14px;">
@@ -865,7 +857,6 @@
             </div>
         `).join('');
 
-        // Impressão dos logs horários de entradas e saídas
         const logBox = document.getElementById('adm-logs-box');
         logBox.innerHTML = systemDB.logs.map(l => `<div>${l}</div>`).reverse().join('');
     }
