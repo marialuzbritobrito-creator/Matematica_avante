@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matemática Avante</title>
+    <title>Matemática Avante - Plataforma Suprema</title>
     <style>
-        /* PALETA DE CORES E CONFIGURAÇÕES DE TEMA */
+        /* TEMAS EXCLUSIVOS DA LOJA DE PERSONALIZAÇÃO */
         :root {
             --bg-main: #0b0f19;
             --bg-card: #151f32;
@@ -21,7 +21,7 @@
             --brand-blue: #38bdf8;
         }
 
-        [data-theme="light"] {
+        [data-theme="light-clean"] {
             --bg-main: #f1f5f9;
             --bg-card: #ffffff;
             --bg-input: #f8fafc;
@@ -29,6 +29,29 @@
             --text-muted: #64748b;
             --border: #cbd5e1;
             --brand-blue: #0284c7;
+            --accent: #ef4444;
+        }
+
+        [data-theme="matrix-green"] {
+            --bg-main: #010a01;
+            --bg-card: #021a02;
+            --bg-input: #000000;
+            --text-main: #00ff00;
+            --text-muted: #008800;
+            --border: #005500;
+            --brand-blue: #33ff33;
+            --accent: #00ff00;
+        }
+
+        [data-theme="sunset-red"] {
+            --bg-main: #1a0f0f;
+            --bg-card: #2d1919;
+            --bg-input: #150a0a;
+            --text-main: #ffd2d2;
+            --text-muted: #b27b7b;
+            --border: #4a2323;
+            --brand-blue: #f97316;
+            --accent: #ef4444;
         }
 
         * {
@@ -36,57 +59,33 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s, border-color 0.3s;
+            transition: background-color 0.2s, border-color 0.2s;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 60px;
-        }
-
-        /* CONTROLE DE TEMA (SOL/LUA) */
-        .theme-toggle-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        .theme-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
+            padding-bottom: 80px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* LOGO ARREDONDADA COM BORDA VERMELHA */
+        /* LOGO ARREDONDADA E TITULO CHIQUE */
         .logo-container {
             text-align: center;
-            padding: 20px 0 10px 0;
+            padding: 15px 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
         .logo-wrapper {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border: 4px solid var(--accent);
             border-radius: 50%;
             overflow: hidden;
@@ -94,7 +93,7 @@
             justify-content: center;
             align-items: center;
             background: #1e293b;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         .logo-img {
             width: 100%;
@@ -102,15 +101,15 @@
             object-fit: cover;
         }
         .brand-title {
-            font-family: 'Georgia', serif;
-            font-size: 32px;
-            font-weight: bold;
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-size: 36px;
+            font-weight: 700;
             color: var(--brand-blue);
-            margin-top: 12px;
+            margin-top: 10px;
             letter-spacing: 1px;
         }
 
-        /* CARDS */
+        /* CARDS E LAYOUT */
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
@@ -120,337 +119,460 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        /* TELA DE LOGIN */
-        .login-box {
-            max-width: 450px;
-            margin: 20px auto;
+        /* COMPONENTES DE AVATAR / FOTO DE PERFIL */
+        .avatar-frame {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--brand-blue);
+            object-fit: cover;
+            background: #2a3b5c;
+            display: inline-block;
         }
-        .login-box h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 22px;
-        }
-
-        /* FORMULÁRIOS */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-        input[type="text"], select {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-main);
-            font-size: 16px;
+        .avatar-sm {
+            width: 45px;
+            height: 45px;
+            border: 2px solid var(--accent);
         }
 
-        /* BOTÕES */
-        .btn {
-            background-color: var(--accent);
-            color: #ffffff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s, transform 0.1s;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn:hover { background-color: var(--accent-hover); }
-        .btn:active { transform: scale(0.98); }
-        .btn-secondary { background-color: #475569; color: white; }
-        .btn-secondary:hover { background-color: #334155; }
-        .btn-inline { width: auto; }
-        .btn-sm { padding: 8px 16px; font-size: 14px; border-radius: 6px; }
-        
-        .study-btn {
-            background-color: var(--bg-input);
-            color: var(--brand-blue);
-            border: 1px solid var(--brand-blue);
-            margin-bottom: 12px;
-        }
-        .study-btn:hover { background-color: var(--brand-blue); color: #ffffff; }
-
-        /* NAVEGAÇÃO */
-        .app-header {
+        /* ABAS DE NAVEGAÇÃO SUPERIOR */
+        .nav-tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 5px;
         }
-        .nav-tabs { display: flex; gap: 10px; margin-bottom: 25px; }
         .nav-tab-btn {
             background-color: var(--bg-card);
             color: var(--text-muted);
             border: 1px solid var(--border);
-            padding: 10px 18px;
+            padding: 12px 18px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            white-space: nowrap;
         }
-        .nav-tab-btn.active { background-color: var(--accent); color: #ffffff; border-color: var(--accent); }
+        .nav-tab-btn.active {
+            background-color: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+        }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* QUIZ */
-        .quiz-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .progress-bar-container { background: var(--bg-input); height: 10px; border-radius: 5px; width: 100%; margin: 20px 0; overflow: hidden; }
-        .progress-bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
-        .question-text { font-size: 20px; margin-bottom: 25px; font-weight: 600; }
-        .options-list { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
-        .option-btn { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); padding: 14px; border-radius: 8px; text-align: left; font-size: 16px; cursor: pointer; }
-        .option-btn.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: var(--success) !important; }
-        .option-btn.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: var(--danger) !important; }
-        
-        .feedback-box { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
-        .feedback-box.correct { display: block; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); color: var(--success); }
-        .feedback-box.wrong { display: block; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); color: var(--danger); }
-
-        /* MODAL DE ESTUDO */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 2000; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s;
+        /* FORMULÁRIOS */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; color: var(--text-muted); font-size: 14px; }
+        input[type="text"], input[type="password"], select {
+            width: 100%; padding: 12px 16px; background-color: var(--bg-input);
+            border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); font-size: 16px;
         }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            max-width: 650px; width: 90%; max-height: 85vh;
-            border-radius: 16px; display: flex; flex-direction: column;
-        }
-        .modal-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-body { padding: 20px; overflow-y: auto; }
-        .modal-body h4 { margin: 15px 0 5px 0; color: var(--brand-blue); }
-        .modal-body ul { margin-left: 20px; }
 
+        /* BOTÕES */
+        .btn {
+            background-color: var(--accent); color: #ffffff; border: none; padding: 12px 24px;
+            font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer;
+            display: inline-flex; justify-content: center; align-items: center; gap: 8px; transition: opacity 0.2s;
+        }
+        .btn:hover { filter: brightness(1.1); }
+        .btn-block { width: 100%; }
+        .btn-secondary { background-color: #475569; }
+        .btn-sm { padding: 6px 12px; font-size: 13px; border-radius: 6px; }
+
+        /* LISTA DE OPÇÕES DO QUIZ */
+        .options-list { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+        .option-btn {
+            background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main);
+            padding: 15px; border-radius: 10px; text-align: left; font-size: 16px; cursor: pointer; width: 100%;
+        }
+        .option-btn.correct { background: rgba(16, 185, 129, 0.25) !important; border-color: var(--success) !important; color: #ffffff; }
+        .option-btn.wrong { background: rgba(239, 68, 68, 0.25) !important; border-color: var(--danger) !important; color: #ffffff; }
+
+        /* ELEMENTOS VISUAIS */
+        .medal-badge {
+            display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.12);
+            border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px; border-radius: 20px; font-size: 13px; font-weight: bold; margin: 3px;
+        }
+        .progress-container { background: var(--bg-input); height: 12px; border-radius: 6px; width: 100%; margin: 15px 0; overflow: hidden; }
+        .progress-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s; }
+
+        /* GRÁFICO SIMULADO DO ADMIN */
+        .chart-mockup {
+            display: flex; align-items: flex-end; justify-content: space-between; height: 160px;
+            background: var(--bg-input); border-radius: 12px; padding: 15px; margin-top: 15px; border: 1px solid var(--border);
+        }
+        .chart-bar { background: var(--brand-blue); width: 18%; border-radius: 4px 4px 0 0; position: relative; text-align: center; }
+        .chart-bar span { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-main); }
+        .chart-label { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+
+        /* CHAT BOX CONTAINER */
+        .chat-container {
+            background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; height: 220px;
+            overflow-y: auto; padding: 15px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px;
+        }
+        .chat-msg { background: var(--bg-card); padding: 8px 12px; border-radius: 8px; max-width: 80%; width: fit-content; font-size: 14px; }
+        .chat-msg.me { background: var(--brand-blue); color: #000; align-self: flex-end; }
+
+        /* MODAIS */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75);
+            display: flex; justify-content: center; align-items: center; z-index: 3000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-card { background: var(--bg-card); border: 1px solid var(--border); width: 90%; max-width: 680px; max-height: 85vh; border-radius: 16px; display: flex; flex-direction: column; }
+        .modal-body { padding: 25px; overflow-y: auto; }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div class="theme-toggle-container">
-    <button class="theme-btn" id="theme-toggle-btn" onclick="toggleTheme()">🌙</button>
-</div>
-
 <div class="container">
     <div class="logo-container">
         <div class="logo-wrapper">
-            <img class="logo-img" src="logo.jpg" alt="Matemática Avante" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23ef4444\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'none\' stroke=\'%23ef4444\' stroke-width=\'2\'/><path d=\'M7 12h10M12 7v10\' stroke=\'%23ef4444\' stroke-width=\'2\'/></svg>'">
+            <img class="logo-img" id="main-logo-view" src="star-blue.png" alt="Logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23ef4444\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'none\' stroke=\'%23ef4444\' stroke-width=\'2\'/><path d=\'M7 12h10M12 7v10\' stroke=\'%23ef4444\' stroke-width=\'2\'/></svg>'">
         </div>
         <div class="brand-title">Matemática Avante</div>
     </div>
 
-    <div id="login-screen" class="card login-box">
-        <h2>Acesse a Plataforma</h2>
+    <div id="screen-auth" class="card" style="max-width: 480px; margin: 30px auto;">
+        <h2 style="text-align: center; margin-bottom: 20px;">Portal de Acesso</h2>
         <div class="form-group">
-            <label for="in-nome">Seu Nome Completo</label>
-            <input type="text" id="in-nome" placeholder="Ex: Maria Luz">
+            <label>Seu Nome Completo</label>
+            <input type="text" id="auth-name" placeholder="Ex: Maria Luz">
         </div>
         <div class="form-group">
-            <label for="in-role">Tipo de Conta</label>
-            <select id="in-role">
+            <label>Tipo de Conta</label>
+            <select id="auth-role" onchange="toggleAdminPassField()">
                 <option value="aluno">Aluno Estudante</option>
-                <option value="admin">Administrador</option>
+                <option value="admin">Administrador do Sistema</option>
             </select>
         </div>
-        <button class="btn" onclick="authLogin()">Entrar na Plataforma →</button>
+        <div class="form-group hidden" id="admin-pass-box">
+            <label>Senha de Administrador</label>
+            <input type="password" id="auth-pass" placeholder="Digite a chave master">
+        </div>
+        <button class="btn btn-block" onclick="handleAuth()">Entrar no Sistema Celestial →</button>
     </div>
 
-    <div id="app-screen" class="hidden">
-        <div class="card app-header">
-            <div>
-                <h3 id="header-name">Carregando...</h3>
-                <p style="font-size: 13px; color: var(--text-muted);" id="header-role">Aluno</p>
+    <div id="screen-dashboard" class="hidden">
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img id="dash-avatar" class="avatar-frame avatar-sm" src="" alt="Avatar">
+                <div>
+                    <h3 id="dash-welcome">Seja bem-vindo</h3>
+                    <p id="dash-role-badge" style="font-size: 12px; color: var(--brand-blue); font-weight: bold;"></p>
+                </div>
             </div>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <div style="background: rgba(251, 191, 36, 0.15); color: var(--gold); padding: 6px 14px; border-radius: 20px; font-weight: bold;">💎 <span id="header-pts">0</span> Pontos</div>
-                <button class="btn btn-secondary btn-sm btn-inline" onclick="authLogout()">Sair</button>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="color: var(--gold); font-weight: bold; background: rgba(251,191,36,0.1); padding: 8px 14px; border-radius: 30px; border: 1px solid var(--gold);">💎 <span id="dash-points">0</span> Pontos</span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Desconectar</button>
             </div>
         </div>
 
         <div class="nav-tabs">
-            <button class="nav-tab-btn active" id="tab-btn-quiz" onclick="switchTab('quiz')">🧮 Responder Quiz</button>
-            <button class="nav-tab-btn" id="tab-btn-profile" onclick="switchTab('profile')">👤 Meu Perfil</button>
+            <button class="nav-tab-btn active" id="tab-btn-quizzes" onclick="switchTab('quizzes')">🧮 Quizzes & Estudos</button>
+            <button class="nav-tab-btn" id="tab-btn-profile" onclick="switchTab('profile')">👤 Meu Perfil e Medalhas</button>
+            <button class="nav-tab-btn" id="tab-btn-social" onclick="switchTab('social')">🔍 Procurar Amigos & Chat</button>
+            <button class="nav-tab-btn" id="tab-btn-shop" onclick="switchTab('shop')">🏪 Loja de Customização</button>
+            <button class="nav-tab-btn" id="tab-btn-links" onclick="switchTab('links')">🌐 Links Úteis</button>
+            <button class="nav-tab-btn hidden" id="tab-btn-admin" onclick="switchTab('admin')">👑 Painel de Controle Admin</button>
         </div>
 
-        <div id="tab-quiz" class="tab-content active card">
-            <div id="quiz-selection">
-                <h3>Escolha o seu Nível de Desafio</h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Estude o material didático oficial de revisão real antes de abrir o quiz de 10 perguntas.</p>
-                
-                <div class="quiz-levels">
-                    <div class="card" style="margin:0; background: var(--bg-input); text-align:center;">
-                        <h4 style="color: #10b981; margin-bottom:10px;">🟢 Nível Fácil</h4>
-                        <button class="btn btn-sm study-btn" onclick="openStudyModal('facil')">📚 Estudar Conteúdo</button>
-                        <button class="btn btn-sm" onclick="startQuiz('facil')">Iniciar Quiz (10 Perguntas)</button>
+        <div id="tab-quizzes" class="tab-content active">
+            <div id="quiz-hub-view" class="card">
+                <h3>Treinamentos e Simulados</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Estude as cartilhas profundas criadas especialmente para expandir seus horizontes antes de abrir o quiz valendo pontos.</p>
+                <div class="grid-3">
+                    <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                        <h4 style="color: #10b981; margin-bottom: 12px;">🟢 Nível Fácil</h4>
+                        <button class="btn btn-sm btn-block btn-secondary" onclick="openStudy('facil')" style="margin-bottom:8px;">📚 Ler Matéria Completa</button>
+                        <button class="btn btn-sm btn-block" onclick="initiateQuiz('facil')">Jogar Quiz (10 Perguntas)</button>
                     </div>
-
-                    <div class="card" style="margin:0; background: var(--bg-input); text-align:center;">
-                        <h4 style="color: var(--gold); margin-bottom:10px;">🟡 Nível Médio</h4>
-                        <button class="btn btn-sm study-btn" onclick="openStudyModal('medio')">📚 Estudar Conteúdo</button>
-                        <button class="btn btn-sm" onclick="startQuiz('medio')">Iniciar Quiz (10 Perguntas)</button>
+                    <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                        <h4 style="color: var(--gold); margin-bottom: 12px;">🟡 Nível Médio</h4>
+                        <button class="btn btn-sm btn-block btn-secondary" onclick="openStudy('medio')" style="margin-bottom:8px;">📚 Ler Matéria Completa</button>
+                        <button class="btn btn-sm btn-block" onclick="initiateQuiz('medio')">Jogar Quiz (10 Perguntas)</button>
                     </div>
-
-                    <div class="card" style="margin:0; background: var(--bg-input); text-align:center;">
-                        <h4 style="color: #f87171; margin-bottom:10px;">🔴 Nível Avançado</h4>
-                        <button class="btn btn-sm study-btn" onclick="openStudyModal('avancado')">📚 Estudar Conteúdo</button>
-                        <button class="btn btn-sm" onclick="startQuiz('avancado')">Iniciar Quiz (10 Perguntas)</button>
+                    <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                        <h4 style="color: #ef4444; margin-bottom: 12px;">🔴 Nível Avançado</h4>
+                        <button class="btn btn-sm btn-block btn-secondary" onclick="openStudy('avancado')" style="margin-bottom:8px;">📚 Ler Matéria Completa</button>
+                        <button class="btn btn-sm btn-block" onclick="initiateQuiz('avancado')">Jogar Quiz (10 Perguntas)</button>
                     </div>
                 </div>
             </div>
 
-            <div id="quiz-active-box" class="hidden">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span id="quiz-title-lvl" style="font-weight: bold; color: var(--accent);">Nível</span>
-                    <span id="quiz-tracker" style="font-size: 14px; color: var(--text-muted);">Questão 1 de 10</span>
+            <div id="quiz-gameplay-view" class="card hidden">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 id="gameplay-level-title" style="color: var(--brand-blue);">Nível</h4>
+                    <span id="gameplay-counter" style="font-size: 14px; color: var(--text-muted);">Questão 1 de 10</span>
                 </div>
-                <div class="progress-bar-container">
-                    <div id="quiz-progress-fill" class="progress-bar-fill"></div>
+                <div class="progress-container"><div id="gameplay-progress-bar" class="progress-fill"></div></div>
+                <p id="gameplay-question-text" class="question-text" style="margin-top: 15px;"></p>
+                <div id="gameplay-options-box" class="options-list"></div>
+                
+                <div id="gameplay-feedback-box" class="card hidden" style="background: var(--bg-input); margin-top: 15px;">
+                    <strong id="gameplay-feedback-title"></strong>
+                    <p id="gameplay-feedback-desc" style="font-size: 14px; color: var(--text-muted); margin-top: 5px;"></p>
                 </div>
-                <div id="question-container">
-                    <p class="question-text" id="quiz-question-text">Carregando pergunta...</p>
-                    <div class="options-list" id="quiz-options-box"></div>
-                </div>
-                <div id="quiz-feedback" class="feedback-box">
-                    <strong id="feedback-title">Feedback</strong>
-                    <p style="margin-top:5px; font-size:14px;" id="feedback-explanation"></p>
-                </div>
-                <button id="quiz-next-btn" class="btn btn-inline hidden" style="margin-top:15px;" onclick="nextQuestion()">Avançar Próxima →</button>
+                <button id="gameplay-next-btn" class="btn hidden" style="margin-top: 15px;" onclick="advanceQuiz()">Avançar para Próxima Questão →</button>
+            </div>
+
+            <div id="quiz-result-view" class="card hidden">
+                <h3 style="color: var(--gold);">🎉 Quiz Finalizado com Sucesso!</h3>
+                <p id="result-summary-text" style="margin: 10px 0; font-size: 18px;"></p>
+                <div id="result-gabarito-box" style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;"></div>
+                <button class="btn" style="margin-top: 20px;" onclick="closeQuizResult()">Voltar ao Menu Principal</button>
             </div>
         </div>
 
         <div id="tab-profile" class="tab-content card">
-            <h3>Histórico de Desempenho</h3>
-            <div id="profile-history-box" style="margin-top:15px;"></div>
+            <h3>Gerenciamento de Identidade</h3>
+            <div style="display: flex; align-items: center; gap: 25px; margin-top: 20px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <img id="profile-avatar-display" class="avatar-frame" src="" alt="Foto de Perfil"><br>
+                    <label class="btn btn-sm" style="margin-top: 10px; display: inline-block;">
+                        📁 Escolher da Galeria
+                        <input type="file" id="profile-file-input" accept="image/*" style="display:none;" onchange="uploadAvatarImage()">
+                    </label>
+                </div>
+                <div style="flex: 1; min-width: 260px;">
+                    <div class="form-group">
+                        <label>Nome do Usuário</label>
+                        <input type="text" id="profile-name-input">
+                    </div>
+                    <button class="btn" onclick="saveProfileChanges()">Salvar Alterações Cadastrais</button>
+                </div>
+            </div>
+            <hr style="border-color: var(--border); margin: 30px 0;">
+            <h3>🏅 Suas Medalhas de Conquista</h3>
+            <div id="profile-medals-box" style="margin-top: 15px;"></div>
+        </div>
+
+        <div id="tab-social" class="tab-content card">
+            <h3>Rede de Aprendizado</h3>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">Localize seus companheiros de turma pesquisando o nome completo deles abaixo.</p>
+            <div class="form-group">
+                <input type="text" id="social-search-input" placeholder="Digite o nome do colega para pesquisar..." oninput="searchPeers()">
+            </div>
+            <div id="social-results-box" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;"></div>
+
+            <div id="social-chat-view" class="card hidden" style="margin-top: 25px; background: var(--bg-input);">
+                <h4 id="chat-target-title">Conversando com:</h4>
+                <div id="chat-history" class="chat-container"></div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="chat-msg-input" placeholder="Escreva sua mensagem aqui...">
+                    <button class="btn" onclick="sendChatMessage()">Enviar ✉️</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-shop" class="tab-content card">
+            <h3>Loja de Artigos Cosméticos</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Use os pontos acumulados resolvendo os questionários para customizar a interface visual do seu ambiente.</p>
+            <div class="grid-3">
+                <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                    <h4>Fundo Cyber Dark</h4>
+                    <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Tema escuro com detalhes em Neon Vermelho.</p>
+                    <button class="btn btn-sm btn-block" onclick="buyTheme('dark-cyber', 0)">Equipar (Grátis)</button>
+                </div>
+                <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                    <h4>Luminosidade Clean</h4>
+                    <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Fundo totalmente claro focado em leitura diurna.</p>
+                    <button class="btn btn-sm btn-block btn-secondary" id="shop-btn-light" onclick="buyTheme('light-clean', 150)">Comprar por 150 💎</button>
+                </div>
+                <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                    <h4>Código Matrix</h4>
+                    <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Estilo hacker cibernético com cores verdes radiantes.</p>
+                    <button class="btn btn-sm btn-block btn-secondary" id="shop-btn-matrix" onclick="buyTheme('matrix-green', 300)">Comprar por 300 💎</button>
+                </div>
+                <div class="card" style="margin:0; background: var(--bg-input); text-align: center;">
+                    <h4>Crepúsculo Sunset</h4>
+                    <p style="font-size:12px; color: var(--text-muted); margin: 10px 0;">Cores quentes avermelhadas simulando o fim de tarde.</p>
+                    <button class="btn btn-sm btn-block btn-secondary" id="shop-btn-sunset" onclick="buyTheme('sunset-red', 400)">Comprar por 400 💎</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-links" class="tab-content card">
+            <h3>Biblioteca Externa de Matemática</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Portais recomendados para pesquisa complementar, olimpíadas e ferramentas científicas.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://pt.khanacademy.org" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">1. Khan Academy Brasil 🌐</a><p style="font-size:12px; color:var(--text-muted);">Aulas gratuitas do básico ao avançado.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.geogebra.org" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">2. GeoGebra Calculadora Gráfica 🌐</a><p style="font-size:12px; color:var(--text-muted);">Cálculo de funções e geometria tridimensional.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="http://www.obmep.org.br" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">3. Portal Oficial OBMEP 🌐</a><p style="font-size:12px; color:var(--text-muted);">Provas antigas e banco de problemas olímpicos.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.wolframalpha.com" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">4. Wolfram Alpha 🌐</a><p style="font-size:12px; color:var(--text-muted);">Mecanismo de computação algorítmica.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.impa.br" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">5. IMPA - Instituto de Matemática Pura 🌐</a><p style="font-size:12px; color:var(--text-muted);">Pesquisas de alto nível no Brasil.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.obm.org.br" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">6. Olimpíada Brasileira de Matemática 🌐</a><p style="font-size:12px; color:var(--text-muted);">Competições para nível médio e universitário.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://brilliant.org" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">7. Brilliant.org 🌐</a><p style="font-size:12px; color:var(--text-muted);">Desafios visuais interativos e interações lógicas.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.todamateria.com.br/matematica/" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">8. Toda Matéria: Resumos Rápidos 🌐</a><p style="font-size:12px; color:var(--text-muted);">Fórmulas diretas explicadas de forma simples.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.matematica.pt" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">9. Exercícios Resolvidos PT 🌐</a><p style="font-size:12px; color:var(--text-muted);">Fichas de exercícios para download em PDF.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://www.somatematica.com.br" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">10. Só Matemática 🌐</a><p style="font-size:12px; color:var(--text-muted);">Jogos matemáticos e curiosidades históricas.</p></div>
+                <div class="card" style="margin:0; padding:15px; background:var(--bg-input);"><a href="https://arxiv.org/archive/math" target="_blank" style="color: var(--brand-blue); font-weight: bold; text-decoration: none;">11. arXiv Math Articles 🌐</a><p style="font-size:12px; color:var(--text-muted);">Repositório internacional de artigos científicos.</p></div>
+            </div>
+        </div>
+
+        <div id="tab-admin" class="tab-content card">
+            <h3 style="color: var(--accent);">👑 Centro de Controle e Monitoramento Analítico</h3>
+            <p style="color: var(--text-muted);">Acompanhamento em tempo real de logs, métricas globais e evolução da turma.</p>
+            
+            <div class="grid-3" style="margin-top:20px;">
+                <div class="card" style="margin:0; background:var(--bg-input);"><h5>Total Usuários</h5><h2 id="adm-stat-users" style="color: var(--brand-blue);">0</h2></div>
+                <div class="card" style="margin:0; background:var(--bg-input);"><h5>Soma de Pontuações</h5><h2 id="adm-stat-pts" style="color: var(--gold);">0</h2></div>
+                <div class="card" style="margin:0; background:var(--bg-input);"><h5>Chaves de Log Ativas</h5><h2 id="adm-stat-logs" style="color: #ef4444;">0</h2></div>
+            </div>
+
+            <h4 style="margin-top: 30px;">📈 Gráfico de Distribuição e Desempenho</h4>
+            <div class="chart-mockup">
+                <div class="chart-bar" style="height: 35%; background: #10b981;"><span>35%</span><div class="chart-label" style="margin-top:60px;">Fácil</div></div>
+                <div class="chart-bar" style="height: 55%; background: var(--gold);"><span>55%</span><div class="chart-label" style="margin-top:90px;">Médio</div></div>
+                <div class="chart-bar" style="height: 20%; background: #ef4444;"><span>20%</span><div class="chart-label" style="margin-top:35px;">Avançados</div></div>
+                <div class="chart-bar" style="height: 70%; background: var(--brand-blue);"><span>70%</span><div class="chart-label" style="margin-top:115px;">Acessos</div></div>
+            </div>
+
+            <h4 style="margin-top: 30px;">🏆 Classificação Geral (Leaderboard)</h4>
+            <div id="adm-ranking-table" style="background:var(--bg-input); border-radius:10px; padding:15px; margin-top:10px;"></div>
+
+            <h4 style="margin-top: 30px;">📋 Logs e Rastreamento Horário (Entradas e Saídas)</h4>
+            <div id="adm-logs-box" style="background:var(--bg-input); border-radius:10px; padding:15px; margin-top:10px; font-family:monospace; max-height:200px; overflow-y:auto; font-size:12px; color:#34d399;"></div>
         </div>
     </div>
 </div>
 
-<div class="modal-overlay" id="study-modal">
+<div class="modal" id="modal-study">
     <div class="modal-card">
-        <div class="modal-header">
-            <h3 id="modal-subject-title">Material de Estudo Oficial</h3>
-            <span id="modal-page-indicator" style="font-size:13px; background:var(--bg-input); padding:4px 10px; border-radius:10px; color:var(--brand-blue);">Páginas do Material</span>
-        </div>
-        <div class="modal-body" id="modal-subject-text"></div>
-        <div style="padding:15px; border-top:1px solid var(--border); text-align:right;">
-            <button class="btn btn-sm btn-inline" onclick="closeStudyModal()">Finalizar Leitura e Ir pro Quiz</button>
+        <div class="modal-body">
+            <div id="modal-study-core-content"></div>
+            <button class="btn btn-block" style="margin-top:25px;" onclick="closeStudyModal()">Finalizar Estudo Avançado e Iniciar Simulado</button>
         </div>
     </div>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('db_avante_pro')) || { users: [] };
-    let currentUser = JSON.parse(localStorage.getItem('curr_user_pro')) || null;
-    let activeTheme = localStorage.getItem('theme') || 'dark';
-
-    const STUDY_CONTENTS = {
-        facil: `<h2>📖 Apostila: Aritmética e Propriedades Básicas</h2><p style="color:var(--text-muted); margin-bottom:15px;">[Página 1 de 3 do Material de Estudo]</p><h4>1. Ordem das Operações</h4><p>Multiplicações e Divisões têm prioridade absoluta sobre Adições e Subtrações.</p><h4>2. Classificação de Triângulos</h4><p>Equilátero (3 lados iguais), Isósceles (2 lados iguais) e Escaleno (todos os lados diferentes).</p><h4>3. Radiciação</h4><p>A raiz de 144 é 12 pois 12x12=144.</p>`,
-        medio: `<h2>📖 Apostila: Álgebra de 1º Grau e Geometria</h2><p style="color:var(--text-muted); margin-bottom:15px;">[Página 2 de 3 do Material de Estudo]</p><h4>1. Isolar o X</h4><p>Na equação 3x + 5 = 2x + 12, mudamos os termos de lado trocando o sinal algébrico.</p><h4>2. Cálculo de Áreas</h4><p>Área do retângulo = Base × Altura.</p>`,
-        avancado: `<h2>📖 Apostila: Cálculo e Probabilidade Avançada</h2><p style="color:var(--text-muted); margin-bottom:15px;">[Página 3 de 3 do Material de Estudo]</p><h4>1. Regra do Tombo</h4><p>A derivada de axⁿ resulta em n·axⁿ⁻¹.</p><h4>2. Progressão Geométrica (PG)</h4><p>Sequências que crescem multiplicando pela razão fixa q.</p>`
+    // BANCO DE DADOS LOCAL ENGINE (PERSISTIDO EM LOCALSTORAGE)
+    let systemDB = JSON.parse(localStorage.getItem('avante_system_db')) || {
+        users: {},
+        logs: [],
+        themesBought: { "Maria Luz": ["dark-cyber"] }
     };
 
-    const QUIZ_DATABASE = {
+    let sessionUser = null;
+    let targetChatUser = null;
+
+    // CONTEÚDOS DIDÁTICOS PROFUNDOS REALISTAS
+    const REAL_ACADEMIC_STUDIES = {
+        facil: `<h2>Apostila Matemática Básica: Estruturas Iniciais</h2><hr><br><h4>A Hierarquia Numérica</h4><p>Na matemática computacional e pura, as operações obedecem a uma ordem estrita de precedência conhecida como regra PEMDAS. Multiplicações e divisões devem ser executadas de forma prioritária, antes de adições ou subtrações, independentemente da posição física na escrita da linha.</p><br><h4>Propriedades Geométricas dos Polígonos</h4><p>Os triângulos são figuras fundamentais. Classificam-se quanto aos lados em Equilátero (três segmentos perfeitamente idênticos), Isósceles (duas arestas idênticas e uma base variante) e Escaleno (todas as medidas com distorção total).</p>`,
+        medio: `<h2>Apostila de Álgebra Linear e Funções Planas</h2><hr><br><h4>Equações Lineares com Variáveis</h4><p>A resolução de sentenças de primeiro grau exige o isolamento completo da incógnita fundamental através da transposição de termos. Ao cruzar o sinal de igualdade, o operador aritmético sofre inversão simétrica automática: adição vira subtração e multiplicação converte-se em divisão.</p><br><h4>Cálculos Espaciais Bidimensionais</h4><p>A mensuração de áreas em superfícies retangulares ou quadradas é dada pela modelagem de duas dimensões ortogonais, multiplicando a magnitude da Base pela magnitude da Altura perpendicular.</p>`,
+        avancado: `<h2>Apostila de Cálculo Diferencial e Probabilidade Composta</h2><hr><br><h4>A Teoria da Diferenciação</h4><p>A derivada de uma função representa matematicamente a sua taxa de variação instantânea. Pela Regra do Tombo, o expoente de uma potência de X cai para a base multiplicando todo o termo, enquanto o expoente residual perde exatamente uma unidade inteira de valor.</p><br><h4>Análise Combinatória Avançada</h4><p>Os anagramas determinam o rearranjo fatorial de caracteres textuais. Palavras sem repetição de letras calculam-se diretamente aplicando a função fatorial sobre a quantidade total de símbolos constitutivos.</p>`
+    };
+
+    // BANCO DE DADOS OFICIAL: EXATAMENTE 10 QUESTÕES POR NÍVEL
+    const DETAILED_QUESTIONS = {
         facil: [
-            { q: "Qual o valor de 7 + 3 × 4?", o: ["40", "19", "31", "28"], a: 1, e: "Multiplicações primeiro: 3 × 4 = 12. Depois 7 + 12 = 19." },
-            { q: "Um triângulo com três lados iguais a 5cm é:", o: ["Isósceles", "Escaleno", "Equilátero", "Retângulo"], a: 2, e: "Triângulos com 3 lados idênticos chamam-se Equiláteros." },
-            { q: "Qual é a raiz quadrada de 144?", o: ["12", "14", "10", "16"], a: 0, e: "12 × 12 resulta exatamente em 144." },
-            { q: "Quanto é a metade de 3/4?", o: ["3/2", "6/4", "3/8", "1/4"], a: 2, e: "Multiplica-se o denominador por 2, resultando em 3/8." },
-            { q: "Qual o resultado de 15 - 5 × 2?", o: ["20", "5", "10", "15"], a: 1, e: "Multiplicação primeiro: 5 × 2 = 10. Depois 15 - 10 = 5." },
-            { q: "Como se chama um polígono de 5 lados?", o: ["Hexágono", "Quadrado", "Pentágono", "Octógono"], a: 2, e: "Polígonos de 5 lados são Pentágonos." },
-            { q: "Quanto é 2 elevado à quinta potência (2⁵)?", o: ["10", "25", "32", "16"], a: 2, e: "2 × 2 × 2 × 2 × 2 = 32." },
-            { q: "Se uma pizza dividida em 8 pedaços teve 3 comidos, quanto sobrou?", o: ["3/8", "5/8", "8/3", "1/2"], a: 1, e: "Sobraram 5 pedaços de um total de 8, ou seja, 5/8." },
-            { q: "Qual o menor número primo positivo?", o: ["0", "1", "2", "3"], a: 2, e: "O número 2 é o único primo que também é par." },
-            { q: "Qual o resultado da operação 1.200 ÷ 100?", o: ["12", "120", "1,2", "1200"], a: 0, e: "Cortamos dois zeros de ambos, resultando em 12." }
+            { q: "Qual o valor de 7 + 3 × 4?", o: ["40", "19", "31", "28"], a: 1, e: "Multiplicações vêm primeiro: 3 × 4 = 12. Somando 7, resulta em 19." },
+            { q: "Um triângulo com três lados idênticos a 5cm é:", o: ["Isósceles", "Escaleno", "Equilátero", "Retângulo"], a: 2, e: "Lados totalmente iguais definem um triângulo equilátero." },
+            { q: "Qual é a raiz quadrada exata de 144?", o: ["12", "14", "10", "16"], a: 0, e: "Porque 12 multiplicado por 12 gera o produto 144." },
+            { q: "Quanto equivale a metade da fração 3/4?", o: ["3/2", "6/4", "3/8", "1/4"], a: 2, e: "Metade de uma fração duplica seu denominador inferior: 3/(4×2) = 3/8." },
+            { q: "Qual o resultado real de 15 - 5 × 2?", o: ["20", "5", "10", "15"], a: 1, e: "Multiplicação primeiro: 5 × 2 = 10. Operando a subtração: 15 - 10 = 5." },
+            { q: "Como classificamos um polígono estável de 5 lados?", o: ["Hexágono", "Quadrado", "Pentágono", "Octógono"], a: 2, e: "O prefixo grego Penta define uma figura contendo 5 lados lineares." },
+            { q: "Quanto vale 2 elevado à quinta potência (2⁵)?", o: ["10", "25", "32", "16"], a: 2, e: "2 × 2 × 2 × 2 × 2 = 32." },
+            { q: "Se dividirmos uma pizza em 8 pedaços e consumirmos 3, quanto restará?", o: ["3/8", "5/8", "8/3", "1/2"], a: 1, e: "Subtração elementar das partes: 8 - 3 = 5 partes restantes, logo 5/8." },
+            { q: "Qual o menor número primo e par positivo?", o: ["0", "1", "2", "3"], a: 2, e: "O número 2 é o único par no universo inteiro qualificado como número primo." },
+            { q: "Determine o quociente de 1.200 dividido por 100.", o: ["12", "120", "1,2", "1200"], a: 0, e: "A divisão por 100 elimina os dois dígitos zero finais, gerando 12." }
         ],
         medio: [
-            { q: "Qual o valor de x na equação 3x + 5 = 2x + 12?", o: ["x = 5", "x = 7", "x = 12", "x = 4"], a: 1, e: "Isolando: 3x - 2x = 12 - 5 -> x = 7." },
-            { q: "Qual a área de um retângulo com base 8cm e altura 5cm?", o: ["13 cm²", "40 cm²", "26 cm²", "20 cm²"], a: 1, e: "Área = base × altura -> 8 × 5 = 40 cm²." },
-            { q: "Se o triplo de um número mais 4 é igual a 25, qual é o número?", o: ["6", "7", "8", "9"], a: 1, e: "3x + 4 = 25 -> 3x = 21 -> x = 7." },
-            { q: "Quantos graus mede um ângulo reto completo?", o: ["45°", "90°", "180°", "360°"], a: 1, e: "Ângulos retos medem exatamente 90 graus." },
-            { q: "Resolva a equação x/2 + 3 = 7. Qual o valor de x?", o: ["x = 8", "x = 4", "x = 2", "x = 10"], a: 0, e: "x/2 = 4 -> x = 4 × 2 = 8." },
-            { q: "Qual o perímetro de um quadrado que possui área igual a 36 cm²?", o: ["6 cm", "12 cm", "24 cm", "36 cm"], a: 2, e: "Lado = √36 = 6cm. Perímetro = 6 × 4 = 24cm." },
-            { q: "Qual o valor numérico de x² - 3x para x = 5?", o: ["10", "15", "25", "5"], a: 0, e: "5² - 3(5) = 25 - 15 = 10." },
-            { q: "Num triângulo retângulo, se os catetos medem 3 e 4, a hipotenusa mede:", o: ["5", "7", "12", "25"], a: 0, e: "Teorema de Pitágoras: 3² + 4² = 9 + 16 = 25. A raiz de 25 é 5." },
-            { q: "O que representa o coeficiente angular de uma reta?", o: ["A área", "A inclinação da reta", "O ponto zero", "O comprimento"], a: 1, e: "Determina a taxa de inclinação ou declividade da reta." },
-            { q: "Qual a média aritmética simples entre os números 10, 20 e 60?", o: ["30", "40", "20", "90"], a: 0, e: "(10 + 20 + 60) ÷ 3 = 90 ÷ 3 = 30." }
+            { q: "Qual o valor de x na equação linear 3x + 5 = 2x + 12?", o: ["x = 5", "x = 7", "x = 12", "x = 4"], a: 1, e: "Agrupando termos: 3x - 2x = 12 - 5, concluindo que x = 7." },
+            { q: "Determine a área de um retângulo com base de 8cm e altura de 5cm.", o: ["13 cm²", "40 cm²", "26 cm²", "20 cm²"], a: 1, e: "Área = Base × Altura. Sendo assim, 8 × 5 = 40 cm²." },
+            { q: "O triplo de um número somado com 4 é igual a 25. Que número é esse?", o: ["6", "7", "8", "9"], a: 1, e: "Montagem: 3x + 4 = 25 -> 3x = 21 -> x = 7." },
+            { q: "Qual a abertura angular exata de um ângulo reto?", o: ["45°", "90°", "180°", "360°"], a: 1, e: "Ângulos retos medem por convenção geométrica exatos 90 graus." },
+            { q: "Ache o valor de x para: x/2 + 3 = 7.", o: ["x = 8", "x = 4", "x = 2", "x = 10"], a: 0, e: "Subtraindo 3: x/2 = 4. Multiplicando pelo divisor: x = 4 × 2 = 8." },
+            { q: "Qual o perímetro de um quadrado cuja área interna totaliza 36 cm²?", o: ["6 cm", "12 cm", "24 cm", "36 cm"], a: 2, e: "Lado = √36 = 6cm. Perímetro soma os 4 lados: 6 × 4 = 24cm." },
+            { q: "Qual o valor numérico para a expressão x² - 3x adotando x = 5?", o: ["10", "15", "25", "5"], a: 0, e: "Substituindo: 5² - 3(5) = 25 - 15 = 10." },
+            { q: "Num triângulo retângulo, se os catetos valem 3 e 4, a hipotenusa vale:", o: ["5", "7", "12", "25"], a: 0, e: "Teorema de Pitágoras: h² = 3² + 4² = 9 + 16 = 25. Tirando a raiz, obtemos 5." },
+            { q: "O coeficiente angular de uma equação de reta exprime geometricamente a:", o: ["Área total", "Inclinação da reta", "Interseção com X", "Distância"], a: 1, e: "Representa a declividade ou grau de inclinação da reta gráfica." },
+            { q: "Qual a média aritmética simples obtida do conjunto [10, 20, 60]?", o: ["30", "40", "20", "90"], a: 0, e: "Somatória total (90) dividida pela contagem de termos (3) = 30." }
         ],
         avancado: [
-            { q: "Qual é a derivada da função f(x) = 3x² + 5x - 2?", o: ["f'(x) = 6x + 5", "f'(x) = 3x + 5", "f'(x) = 6x", "f'(x) = 2x"], a: 0, e: "Regra do tombo aplicada: d/dx(3x²) = 6x e d/dx(5x) = 5." },
-            { q: "Em uma PG com a₁ = 2 e razão q = 3, qual o terceiro termo (a₃)?", o: ["6", "12", "18", "8"], a: 2, e: "a₁ = 2, a₂ = 2×3 = 6, a₃ = 6×3 = 18." },
-            { q: "Qual é a probabilidade de tirar um número par num dado comum de 6 faces?", o: ["1/6", "1/2", "2/3", "1/3"], a: 1, e: "São 3 números pares (2,4,6) de 6 totais -> 3/6 simplifica para 1/2." },
-            { q: "Conversta a fração de valor 3/5 para o formato decimal:", o: ["0,35", "0,53", "0,6", "1,6"], a: 2, e: "Dividindo 3 por 5 obtemos exatamente 0,6." },
-            { q: "Qual o valor do logaritmo de 1000 na base 10?", o: ["2", "3", "4", "10"], a: 1, e: "10 elevado ao cubo (10³) é igual a 1000, logo o logaritmo é 3." },
-            { q: "Se f(x) = ln(x), qual é a sua derivada f'(x)?", o: ["e^x", "1/x", "x", "1"], a: 1, e: "A derivada por tabela da função ln(x) é 1/x." },
-            { q: "Qual o valor do determinante de uma matriz identidade 3x3?", o: ["0", "1", "3", "9"], a: 1, e: "O determinante de qualquer matriz identidade é sempre igual a 1." },
-            { q: "Quantos anagramas possui a palavra MAT?", o: ["3", "6", "9", "2"], a: 1, e: "Número de letras fatorial: 3! = 3 × 2 × 1 = 6." },
-            { q: "Qual a soma dos ângulos internos de um hexágono regular?", o: ["360°", "540°", "720°", "900°"], a: 2, e: "Fórmula S = (n-2)×180 -> (6-2)×180 = 4 × 180 = 720°." },
-            { q: "Qual o valor numérico do cosseno de 0 graus?", o: ["0", "0.5", "1", "-1"], a: 2, e: "No ciclo trigonométrico, o cosseno de 0 graus é igual a 1." }
+            { q: "Qual a derivada analítica para a função f(x) = 3x² + 5x - 2?", o: ["f'(x) = 6x + 5", "f'(x) = 3x + 5", "f'(x) = 6x", "f'(x) = 2x"], a: 0, e: "Tombo do expoente: d/dx(3x²) = 6x, e d/dx(5x) = 5. O termo constante some." },
+            { q: "Numa Progressão Geométrica com a₁ = 2 e razão q = 3, calcule o termo a₃.", o: ["6", "12", "18", "8"], a: 2, e: "Termos: a₁=2; a₂=2×3=6; a₃=6×3=18." },
+            { q: "Qual a chance probabilística de obter um valor par lançando um dado de 6 lados?", o: ["1/6", "1/2", "2/3", "1/3"], a: 1, e: "Casos favoráveis são 3 (2, 4, 6) em 6 opções totais. 3/6 simplifica para 1/2." },
+            { q: "Converta de forma direta o numeral fracionário 3/5 em formato decimal.", o: ["0,35", "0,53", "0,6", "1,6"], a: 2, e: "A divisão direta do numerador 3 pelo denominador 5 resulta em 0,6." },
+            { q: "Ache o logaritmo de 1000 calculado na base fundamental de 10.", o: ["2", "3", "4", "10"], a: 1, e: "Como 10 elevado ao cubo resulta em 1000, o valor logarítmico correspondente é 3." },
+            { q: "Determine a derivada de primeira ordem para f(x) = ln(x).", o: ["e^x", "1/x", "x", "1"], a: 1, e: "A derivada tabelada direta do logaritmo natural de x é representada por 1/x." },
+            { q: "Qual o valor do determinante de uma matriz identidade de ordem 3?", o: ["0", "1", "3", "9"], a: 1, e: "O determinante de matrizes identidade de qualquer ordem resulta invariavelmente em 1." },
+            { q: "Calcule a quantidade de anagramas possíveis utilizando as letras da palavra MAT.", o: ["3", "6", "9", "2"], a: 1, e: "Calculado por permutação sem repetição: 3! = 3 × 2 × 1 = 6 combinações." },
+            { q: "Qual a somatória de todos os ângulos internos de um hexágono regular?", o: ["360°", "540°", "720°", "900°"], a: 2, e: "Fórmula S = (n-2)×180. Substituindo n=6: (4)×180 = 720 graus." },
+            { q: "Encontre o valor numérico exato para o cosseno de zero graus.", o: ["0", "0.5", "1", "-1"], a: 2, e: "No ciclo trigonométrico, a projeção do arco zero no eixo das abscissas vale 1." }
         ]
     };
 
-    function toggleTheme() {
-        const btn = document.getElementById('theme-toggle-btn');
-        if (activeTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            activeTheme = 'light';
-            btn.innerText = "☀️";
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-            activeTheme = 'dark';
-            btn.innerText = "🌙";
+    function saveDB() { localStorage.setItem('avante_system_db', JSON.stringify(systemDB)); }
+
+    function toggleAdminPassField() {
+        const role = document.getElementById('auth-role').value;
+        document.getElementById('admin-pass-box').className = role === 'admin' ? "form-group" : "form-group hidden";
+    }
+
+    // AUTENTICAÇÃO E LOGS DE HORÁRIO EM TEMPO REAL
+    function handleAuth() {
+        const name = document.getElementById('auth-name').value.trim();
+        const role = document.getElementById('auth-role').value;
+        const pass = document.getElementById('auth-pass').value;
+
+        if (!name) return alert("Por favor, preencha o campo de nome completo!");
+        if (role === 'admin' && pass !== '123') return alert("Senha mestra de administrador inválida!");
+
+        const timeStamp = new Date().toLocaleTimeString('pt-BR');
+
+        if (!systemDB.users[name]) {
+            systemDB.users[name] = { name, role, points: 0, avatar: '', medals: [], activeTheme: 'dark-cyber', chatHistory: {} };
+            if (!systemDB.themesBought[name]) systemDB.themesBought[name] = ["dark-cyber"];
         }
-        localStorage.setItem('theme', activeTheme);
+
+        sessionUser = systemDB.users[name];
+        systemDB.logs.push(`[${timeStamp}] 🟢 ${sessionUser.name} (${sessionUser.role.toUpperCase()}) conectou à plataforma.`);
+        saveDB();
+
+        applyVisualTheme(sessionUser.activeTheme);
+        renderDashboard();
     }
 
-    function openStudyModal(level) {
-        document.getElementById('modal-subject-text').innerHTML = STUDY_CONTENTS[level];
+    function logout() {
+        if (sessionUser) {
+            const timeStamp = new Date().toLocaleTimeString('pt-BR');
+            systemDB.logs.push(`[${timeStamp}] 🔴 ${sessionUser.name} encerrou a sessão de estudos.`);
+            saveDB();
+        }
+        sessionUser = null;
+        location.reload();
+    }
+
+    function applyVisualTheme(themeName) {
+        if (themeName === 'dark-cyber') document.documentElement.removeAttribute('data-theme');
+        else document.documentElement.setAttribute('data-theme', themeName);
+    }
+
+    function renderDashboard() {
+        document.getElementById('screen-auth').classList.add('hidden');
+        document.getElementById('screen-dashboard').classList.remove('hidden');
+
+        document.getElementById('dash-welcome').innerText = `Olá, ${sessionUser.name}`;
+        document.getElementById('dash-role-badge').innerText = sessionUser.role === 'admin' ? "👑 ADMINISTRADOR" : "🎓 ESTUDANTE MATEMÁTICO";
+        document.getElementById('dash-points').innerText = sessionUser.points;
         
-        let pNum = level === 'facil' ? "Parte 1 de 3" : level === 'medio' ? "Parte 2 de 3" : "Parte 3 de 3";
-        document.getElementById('modal-page-indicator').innerText = pNum;
+        const avatarImg = sessionUser.avatar || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2338bdf8\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'%23151f32\' stroke=\'%2338bdf8\' stroke-width=\'1\'/><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z\'/></svg>';
+        document.getElementById('dash-avatar').src = avatarImg;
+        document.getElementById('profile-avatar-display').src = avatarImg;
+        document.getElementById('profile-name-input').value = sessionUser.name;
+
+        if (sessionUser.role === 'admin') document.getElementById('tab-btn-admin').classList.remove('hidden');
         
-        document.getElementById('study-modal').classList.add('active');
-    }
-    
-    function closeStudyModal() {
-        document.getElementById('study-modal').classList.remove('active');
-    }
-
-    function authLogin() {
-        const nomeInput = document.getElementById('in-nome').value.trim();
-        const roleSelect = document.getElementById('in-role').value;
-        if (!nomeInput) return alert("Digite o seu nome.");
-        currentUser = { nome: nomeInput, role: roleSelect, pts: 0, history: [] };
-        initApp();
-    }
-
-    function authLogout() { currentUser = null; location.reload(); }
-
-    function initApp() {
-        document.getElementById('login-screen').classList.add('hidden');
-        document.getElementById('app-screen').classList.remove('hidden');
-        document.getElementById('header-name').innerText = currentUser.nome;
-        document.getElementById('header-role').innerText = currentUser.role === 'admin' ? "👑 Administrador" : "🎓 Aluno";
-        document.getElementById('header-pts').innerText = currentUser.pts;
-        renderHistory();
+        checkAndAwardMedals();
+        renderMedals();
+        syncShopButtons();
+        updateAdminPanel();
     }
 
     function switchTab(tabId) {
@@ -460,94 +582,293 @@
         document.getElementById(`tab-${tabId}`).classList.add('active');
     }
 
-    let activeQuiz = { level: '', questions: [], currentIndex: 0, correctCount: 0, answered: false };
+    // CARREGAR FOTO DA SUA GALERIA DE VERDADE
+    function uploadAvatarImage() {
+        const file = document.getElementById('profile-file-input').files[0];
+        if (!file) return;
 
-    function startQuiz(level) {
-        activeQuiz.level = level;
-        activeQuiz.questions = JSON.parse(JSON.stringify(QUIZ_DATABASE[level]));
-        activeQuiz.currentIndex = 0;
-        activeQuiz.correctCount = 0;
-        activeQuiz.answered = false;
-
-        document.getElementById('quiz-selection').classList.add('hidden');
-        document.getElementById('quiz-active-box').classList.remove('hidden');
-        renderQuestion();
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            sessionUser.avatar = reader.result;
+            systemDB.users[sessionUser.name].avatar = reader.result;
+            saveDB();
+            renderDashboard();
+        }
+        reader.readAsDataURL(file);
     }
 
-    function renderQuestion() {
-        activeQuiz.answered = false;
-        document.getElementById('quiz-feedback').style.display = "none";
-        document.getElementById('quiz-next-btn').classList.add('hidden');
-
-        const qData = activeQuiz.questions[activeQuiz.currentIndex];
-        const total = activeQuiz.questions.length;
+    function saveProfileChanges() {
+        const newName = document.getElementById('profile-name-input').value.trim();
+        if (!newName) return alert("O nome não pode ficar vazio!");
         
-        document.getElementById('quiz-title-lvl').innerText = `Nível: ${activeQuiz.level.toUpperCase()}`;
-        document.getElementById('quiz-tracker').innerText = `Questão ${activeQuiz.currentIndex + 1} de ${total}`;
-        document.getElementById('quiz-progress-fill').style.width = `${((activeQuiz.currentIndex) / total) * 100}%`;
-        document.getElementById('quiz-question-text').innerText = qData.q;
-
-        const box = document.getElementById('quiz-options-box');
-        box.innerHTML = qData.o.map((opt, i) => `<button class="option-btn" onclick="checkAnswer(${i})" id="opt-${i}">${opt}</button>`).join('');
-    }
-
-    function checkAnswer(idx) {
-        if (activeQuiz.answered) return;
-        activeQuiz.answered = true;
-
-        const qData = activeQuiz.questions[activeQuiz.currentIndex];
-        const buttons = document.getElementById('quiz-options-box').getElementsByTagName('button');
-        for (let b of buttons) b.disabled = true;
-
-        const feedBox = document.getElementById('quiz-feedback');
-        if (idx === qData.a) {
-            document.getElementById(`opt-${idx}`).classList.add('correct');
-            feedBox.className = "feedback-box correct";
-            document.getElementById('feedback-title').innerText = "🎯 Acertou de primeira!";
-            activeQuiz.correctCount++;
-        } else {
-            document.getElementById(`opt-${idx}`).classList.add('wrong');
-            document.getElementById(`opt-${qData.a}`).classList.add('correct');
-            feedBox.className = "feedback-box wrong";
-            document.getElementById('feedback-title').innerText = "❌ Resposta errada.";
+        if (newName !== sessionUser.name) {
+            delete systemDB.users[sessionUser.name];
+            sessionUser.name = newName;
+            systemDB.users[newName] = sessionUser;
+            saveDB();
         }
-
-        document.getElementById('feedback-explanation').innerText = qData.e;
-        feedBox.style.display = "block";
-        document.getElementById('quiz-next-btn').classList.remove('hidden');
+        alert("Dados cadastrais modificados com sucesso!");
+        renderDashboard();
     }
 
-    function nextQuestion() {
-        activeQuiz.currentIndex++;
-        if (activeQuiz.currentIndex < activeQuiz.questions.length) {
-            renderQuestion();
-        } else {
-            const finalPts = activeQuiz.correctCount * 10;
-            currentUser.pts += finalPts;
-            currentUser.history.unshift({ level: activeQuiz.level, score: activeQuiz.correctCount, total: activeQuiz.questions.length });
-            
-            alert(`Parabéns! Você concluiu as 10 questões!\nAcertos: ${activeQuiz.correctCount}/10\nPontos recebidos: +${finalPts} 💎`);
-            document.getElementById('quiz-active-box').classList.add('hidden');
-            document.getElementById('quiz-selection').classList.remove('hidden');
-            initApp();
-        }
+    // CONQUISTAS E MEDALHAS
+    function checkAndAwardMedals() {
+        let m = sessionUser.medals || [];
+        if (sessionUser.points >= 50 && !m.includes("Iniciante de Bronze 🥉")) m.push("Iniciante de Bronze 🥉");
+        if (sessionUser.points >= 150 && !m.includes("Geômetra de Prata 🥈")) m.push("Geômetra de Prata 🥈");
+        if (sessionUser.points >= 300 && !m.includes("Mestre de Ouro ✨🥇")) m.push("Mestre de Ouro ✨🥇");
+        sessionUser.medals = m;
+        systemDB.users[sessionUser.name].medals = m;
+        saveDB();
     }
 
-    function renderHistory() {
-        const box = document.getElementById('profile-history-box');
-        if (!currentUser.history || currentUser.history.length === 0) {
-            box.innerHTML = "<p style='color:var(--text-muted);'>Nenhum exercício feito até agora.</p>";
+    function renderMedals() {
+        const box = document.getElementById('profile-medals-box');
+        if (!sessionUser.medals || sessionUser.medals.length === 0) {
+            box.innerHTML = "<p style='color: var(--text-muted); font-size:14px;'>Resolva Quizzes para desbloquear condecorações honorárias.</p>";
             return;
         }
-        box.innerHTML = currentUser.history.map(h => `
-            <div style="background:var(--bg-input); padding:12px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between;">
-                <span>Nível: <strong>${h.level.toUpperCase()}</strong></span>
-                <span>Placar: ${h.score}/${h.total} Acertos</span>
-            </div>
-        `).join('');
+        box.innerHTML = sessionUser.medals.map(med => `<span class="medal-badge">${med}</span>`).join('');
     }
 
-    window.onload = () => { if (localStorage.getItem('theme') === 'light') toggleTheme(); };
+    // LEITURA DETALHADA E MATÉRIA DIDÁTICA
+    function openStudy(lvl) {
+        document.getElementById('modal-study-core-content').innerHTML = REAL_ACADEMIC_STUDIES[lvl];
+        document.getElementById('modal-study').classList.add('active');
+    }
+    function closeStudyModal() { document.getElementById('modal-study').classList.remove('active'); }
+
+    // MECÂNICA COMPLETA DE 10 QUESTÕES NO QUIZ COM GABARITO NO FINAL
+    let activeEngine = { lvl: '', idx: 0, hits: 0, historyLog: [] };
+
+    function initiateQuiz(level) {
+        activeEngine.lvl = level;
+        activeEngine.idx = 0;
+        activeEngine.hits = 0;
+        activeEngine.historyLog = [];
+
+        document.getElementById('quiz-hub-view').classList.add('hidden');
+        document.getElementById('quiz-gameplay-view').classList.remove('hidden');
+        renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+        document.getElementById('gameplay-feedback-box').classList.add('hidden');
+        document.getElementById('gameplay-next-btn').classList.add('hidden');
+        
+        const dataset = DETAILED_QUESTIONS[activeEngine.lvl][activeEngine.idx];
+        const total = DETAILED_QUESTIONS[activeEngine.lvl].length;
+
+        document.getElementById('gameplay-level-title').innerText = `Nível: ${activeEngine.lvl.toUpperCase()}`;
+        document.getElementById('gameplay-counter').innerText = `Questão ${activeEngine.idx + 1} de ${total}`;
+        document.getElementById('gameplay-progress-bar').style.width = `${((activeEngine.idx) / total) * 100}%`;
+        document.getElementById('gameplay-question-text').innerText = dataset.q;
+
+        const box = document.getElementById('gameplay-options-box');
+        box.innerHTML = dataset.o.map((opt, i) => `<button class="option-btn" onclick="evaluateQuizChoice(${i})" id="q-opt-${i}">${opt}</button>`).join('');
+    }
+
+    function evaluateQuizChoice(chosenIdx) {
+        const dataset = DETAILED_QUESTIONS[activeEngine.lvl][activeEngine.idx];
+        const buttons = document.getElementById('gameplay-options-box').getElementsByTagName('button');
+        
+        for (let b of buttons) b.disabled = true;
+
+        const isCorrect = (chosenIdx === dataset.a);
+        if (isCorrect) {
+            document.getElementById(`q-opt-${chosenIdx}`).classList.add('correct');
+            activeEngine.hits++;
+        } else {
+            document.getElementById(`q-opt-${chosenIdx}`).classList.add('wrong');
+            document.getElementById(`q-opt-${dataset.a}`).classList.add('correct');
+        }
+
+        activeEngine.historyLog.push({ q: dataset.q, userAns: dataset.o[chosenIdx], rightAns: dataset.o[dataset.a], correct: isCorrect });
+
+        document.getElementById('gameplay-feedback-title').innerText = isCorrect ? "🎯 Muito bem, assertivo!" : "❌ Resposta incorreta!";
+        document.getElementById('gameplay-feedback-desc').innerText = dataset.e;
+        document.getElementById('gameplay-feedback-box').classList.remove('hidden');
+        document.getElementById('gameplay-next-btn').classList.remove('hidden');
+    }
+
+    function advanceQuiz() {
+        activeEngine.idx++;
+        if (activeEngine.idx < DETAILED_QUESTIONS[activeEngine.lvl].length) {
+            renderQuizQuestion();
+        } else {
+            // FIM DO QUIZ DE 10 PERGUNTAS - PROCESSAR RECOMPENSAS
+            const reward = activeEngine.hits * 15;
+            sessionUser.points += reward;
+            systemDB.users[sessionUser.name].points = sessionUser.points;
+            saveDB();
+
+            document.getElementById('quiz-gameplay-view').classList.add('hidden');
+            document.getElementById('quiz-result-view').classList.remove('hidden');
+            
+            document.getElementById('result-summary-text').innerText = `Você completou todas as 10 perguntas! Acertou ${activeEngine.hits} de 10. Recompensa: +${reward} 💎`;
+            
+            // CONSTRUÇÃO COMPLETA DO GABARITO REQUISITADO
+            const gabaritoBox = document.getElementById('result-gabarito-box');
+            gabaritoBox.innerHTML = activeEngine.historyLog.map((item, id) => `
+                <div style="background: var(--bg-input); padding: 12px; border-radius: 8px; border-left: 5px solid ${item.correct ? 'var(--success)' : 'var(--danger)'};">
+                    <strong>Questão ${id+1}: ${item.q}</strong>
+                    <p style="font-size:13px; margin-top:4px;">Sua escolha: <span style="color:${item.correct ? 'var(--success)':'var(--danger)'}; font-weight:bold;">${item.userAns}</span></p>
+                    ${!item.correct ? `<p style="font-size:13px; color:var(--success);">Gabarito Correto: ${item.rightAns}</p>` : ''}
+                </div>
+            `).join('');
+            
+            renderDashboard();
+        }
+    }
+
+    function closeQuizResult() {
+        document.getElementById('quiz-result-view').classList.add('hidden');
+        document.getElementById('quiz-hub-view').classList.remove('hidden');
+    }
+
+    // ENGINE DE PESQUISA DE COLEGAS, VISUALIZAÇÃO E CHAT INTEGRADO
+    function searchPeers() {
+        const query = document.getElementById('social-search-input').value.trim().toLowerCase();
+        const box = document.getElementById('social-results-box');
+        box.innerHTML = "";
+        
+        if (!query) return;
+
+        Object.keys(systemDB.users).forEach(key => {
+            const usr = systemDB.users[key];
+            if (usr.name.toLowerCase().includes(query) && usr.name !== sessionUser.name) {
+                const item = document.createElement('div');
+                item.style = "background: var(--bg-input); padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;";
+                
+                const medHtml = usr.medals.map(m => `<span class="medal-badge" style="font-size:10px; padding:2px 6px;">${m}</span>`).join('');
+                
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <img class="avatar-frame avatar-sm" src="${usr.avatar || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2338bdf8\'><circle cx=\'12\' cy=\'12\' r=\'10\' fill=\'%23151f32\' stroke=\'%2338bdf8\' stroke-width=\'1\'/><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z\'/></svg>'}" alt="Avatar">
+                        <div>
+                            <strong>${usr.name}</strong> <span style="font-size:12px; color:var(--gold);">💎 ${usr.points} Pontos</span>
+                            <div style="margin-top:4px;">${medHtml || '<span style="font-size:11px; color:var(--text-muted);">Sem medalhas</span>'}</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm" onclick="openChatWithUser('${usr.name}')">Conversar 💬</button>
+                `;
+                box.appendChild(item);
+            }
+        });
+    }
+
+    function openChatWithUser(targetName) {
+        targetChatUser = targetName;
+        document.getElementById('chat-target-title').innerText = `Conversando com: ${targetChatUser}`;
+        document.getElementById('social-chat-view').classList.remove('hidden');
+        renderChatHistory();
+    }
+
+    function renderChatHistory() {
+        const historyBox = document.getElementById('chat-history');
+        historyBox.innerHTML = "";
+        
+        if (!sessionUser.chatHistory) sessionUser.chatHistory = {};
+        const msgs = sessionUser.chatHistory[targetChatUser] || [];
+
+        msgs.forEach(m => {
+            const div = document.createElement('div');
+            div.className = m.sender === sessionUser.name ? "chat-msg me" : "chat-msg";
+            div.innerText = m.text;
+            historyBox.appendChild(div);
+        });
+        historyBox.scrollTop = historyBox.scrollHeight;
+    }
+
+    function sendChatMessage() {
+        const inp = document.getElementById('chat-msg-input');
+        const txt = inp.value.trim();
+        if (!txt) return;
+
+        if (!sessionUser.chatHistory) sessionUser.chatHistory = {};
+        if (!sessionUser.chatHistory[targetChatUser]) sessionUser.chatHistory[targetChatUser] = [];
+        
+        const payload = { sender: sessionUser.name, text: txt };
+        sessionUser.chatHistory[targetChatUser].push(payload);
+        systemDB.users[sessionUser.name].chatHistory = sessionUser.chatHistory;
+
+        // Sincronizar no banco de dados do colega destinatário
+        if (!systemDB.users[targetChatUser].chatHistory) systemDB.users[targetChatUser].chatHistory = {};
+        if (!systemDB.users[targetChatUser].chatHistory[sessionUser.name]) systemDB.users[targetChatUser].chatHistory[sessionUser.name] = [];
+        systemDB.users[targetChatUser].chatHistory[sessionUser.name].push(payload);
+
+        saveDB();
+        inp.value = "";
+        renderChatHistory();
+    }
+
+    // LOJA DE CUSTOMIZAÇÃO POR PONTOS DO QUIZ
+    function buyTheme(themeName, cost) {
+        if (!systemDB.themesBought[sessionUser.name]) systemDB.themesBought[sessionUser.name] = ["dark-cyber"];
+        
+        if (systemDB.themesBought[sessionUser.name].includes(themeName)) {
+            sessionUser.activeTheme = themeName;
+            systemDB.users[sessionUser.name].activeTheme = themeName;
+            saveDB();
+            applyVisualTheme(themeName);
+            alert("Tema visual aplicado de forma imediata!");
+            return;
+        }
+
+        if (sessionUser.points >= cost) {
+            sessionUser.points -= cost;
+            systemDB.users[sessionUser.name].points = sessionUser.points;
+            systemDB.themesBought[sessionUser.name].push(themeName);
+            sessionUser.activeTheme = themeName;
+            systemDB.users[sessionUser.name].activeTheme = themeName;
+            saveDB();
+            applyVisualTheme(themeName);
+            alert("Tema comprado e equipado com absoluto sucesso!");
+            renderDashboard();
+        } else {
+            alert(`Pontuação insuficiente! Você necessita de ${cost} pontos.`);
+        }
+    }
+
+    function syncShopButtons() {
+        if (!sessionUser || !systemDB.themesBought[sessionUser.name]) return;
+        const list = systemDB.themesBought[sessionUser.name];
+
+        if (list.includes('light-clean')) document.getElementById('shop-btn-light').innerText = "Equipar Tema";
+        if (list.includes('matrix-green')) document.getElementById('shop-btn-matrix').innerText = "Equipar Tema";
+        if (list.includes('sunset-red')) document.getElementById('shop-btn-sunset').innerText = "Equipar Tema";
+    }
+
+    // PAINEL ANALÍTICO COMPLETO DO ADMINISTRADOR
+    function updateAdminPanel() {
+        const uKeys = Object.keys(systemDB.users);
+        document.getElementById('adm-stat-users').innerText = uKeys.length;
+        
+        let totalPts = 0;
+        let rankingArr = [];
+        uKeys.forEach(k => {
+            totalPts += systemDB.users[k].points;
+            rankingArr.push({ name: systemDB.users[k].name, pts: systemDB.users[k].points, role: systemDB.users[k].role });
+        });
+        
+        document.getElementById('adm-stat-pts').innerText = totalPts;
+        document.getElementById('adm-stat-logs').innerText = systemDB.logs.length;
+
+        // Ordenação do Leaderboard por pontos decrescentes
+        rankingArr.sort((a,b) => b.pts - a.pts);
+        
+        const rankTable = document.getElementById('adm-ranking-table');
+        rankTable.innerHTML = rankingArr.map((u, i) => `
+            <div style="display:flex; justify-content:space-between; border-bottom: 1px solid var(--border); padding: 6px 0; font-size:14px;">
+                <span>#${i+1} <strong>${u.name}</strong> (${u.role.toUpperCase()})</span>
+                <span style="color:var(--gold); font-weight:bold;">${u.pts} 💎</span>
+            </div>
+        `).join('');
+
+        // Impressão dos logs horários de entradas e saídas
+        const logBox = document.getElementById('adm-logs-box');
+        logBox.innerHTML = systemDB.logs.map(l => `<div>${l}</div>`).reverse().join('');
+    }
 </script>
 </body>
 </html>
